@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Afacad:wght@500&family=Lobster&family=Roboto&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Afacad:wght@500&family=Libre+Baskerville&family=Lobster&family=Roboto&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -22,4 +22,8 @@
 
 .navLinkFont {
   font-family: "Afacad", sans-serif;
+}
+
+.headingFont {
+  font-family: "Libre Baskerville", serif;
 }
