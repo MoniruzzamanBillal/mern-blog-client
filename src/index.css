@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Afacad:wght@500&family=Lobster&family=Roboto&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -7,4 +9,17 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+}
+
+/* brand name fotn   */
+.logoFont {
+  font-family: "Lobster", sans-serif;
+}
+
+.paragraphFont {
+  font-family: "Roboto", sans-serif;
+}
+
+.navLinkFont {
+  font-family: "Afacad", sans-serif;
 }
