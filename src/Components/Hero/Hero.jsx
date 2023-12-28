@@ -1,6 +1,7 @@
 import React from "react";
 import HeroBlogCard from "./HeroBlogCard";
 import Category from "./Category";
+import RecentPost from "./RecentPost";
 
 const Hero = () => {
   return (
@@ -23,6 +24,14 @@ const Hero = () => {
           <Category />
         </div>
         {/* categories section  */}
+
+        {/* recent post container  */}
+        <div className="recentPostContainer pt-3 xsm:pt-6 sm:pt-8 md:pt-10 pb-2   ">
+          <RecentPost />
+        </div>
+        {/* recent post container  */}
+
+        {/*  */}
       </div>
     </div>
   );
