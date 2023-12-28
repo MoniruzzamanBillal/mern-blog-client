@@ -19,7 +19,7 @@ const NavBar = () => {
 
   return (
     <div className="navContainer fixed w-full  backdrop-blur  ">
-      <motion.div className=" navWrapper w-[92%] m-auto   bg-blue-100 flex justify-between items-center self-center drop-shadow-md  backdrop-blur px-2 py-2 rounded-b-md ">
+      <motion.div className=" navWrapper w-[97%] xsm:w-[94%] sm:w-[92%] m-auto   bg-blue-100 flex justify-between items-center self-center drop-shadow-md  backdrop-blur px-2 py-2 rounded-b-md ">
         {/* nav left  */}
         <div className="navLeft text-xl sm:text-2xl flex justify-evenly gap-1 sm:gap-2 ">
           <FaLinkedin className=" cursor-pointer hover:text-blue-800 " />
@@ -71,25 +71,25 @@ const NavBar = () => {
 
         {/* mobile menu  */}
 
-        <div className="mobileMenu bg-red-400  block sm:hidden relative ">
+        <div className="mobileMenu   block sm:hidden relative ">
           {/* hamburger menu */}
           {/* hamburger menu */}
           <div
             onClick={() => setIsSidebarActive(!isSidebarActive)}
-            className="fixed top-1 right-2 h-[2.5rem]  sm:hidden flex flex-col justify-center gap-1 bg-gray-500 p-1.5 rounded cursor-pointer z-[20] "
+            className="fixed top-0 right-2 h-[2.5rem]  sm:hidden flex flex-col justify-center gap-1  p-1.5 rounded cursor-pointer z-[20] "
           >
             <div
-              className={`line duration-300 h-[3px] w-[25px] bg-white rounded ${
+              className={`line duration-300 h-[3px] w-[25px] bg-gray-600 rounded ${
                 isSidebarActive ? "-rotate-45 translate-y-[7px]" : ""
               }`}
             ></div>
             <div
-              className={`line duration-300 h-[3px] w-[25px] bg-white rounded ${
+              className={`line duration-300 h-[3px] w-[25px] bg-gray-600 rounded ${
                 isSidebarActive ? "opacity-0" : ""
               }`}
             ></div>
             <div
-              className={`line duration-300 h-[3px] w-[25px] bg-white rounded ${
+              className={`line duration-300 h-[3px] w-[25px] bg-gray-600 rounded ${
                 isSidebarActive ? "rotate-45 translate-y-[-7px]" : ""
               }`}
             ></div>
