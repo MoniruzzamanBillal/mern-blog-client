@@ -5,7 +5,7 @@ const PopularPostCard = () => {
   return (
     <Link to={"/detail/id"}>
       <div className="PopularPostCardContainer cursor-pointer ">
-        <div className="PopularPostCardWrapper  ">
+        <div className="PopularPostCardWrapper  p-2 border-y border-gray-100 bg-gray-50 shadow hover:shadow-md ">
           {/* category btn  */}
           <div className="category mb-1.5 lg:mb-3 ">
             <p className=" py-1.5 px-2 text-xs lg:text-sm text-gray-100  rounded-md bg-fuchsia-600 font-semibold inline  ">

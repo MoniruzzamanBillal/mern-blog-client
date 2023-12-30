@@ -1,0 +1,51 @@
+import React from "react";
+
+const UserComment = () => {
+  return (
+    <div className="UserCommentContainer   ">
+      <div className="UserCommentWrapper   ">
+        {/* writer info starts  */}
+        <div className="writerInfo  flex items-center gap-2 mb-1.5  ">
+          {/* writer image  */}
+          <div className="writerImg   ">
+            <img
+              class=" w-9 h-9 xsm:w-10 xsm:h-10 sm:w-11 sm:h-11 rounded-full"
+              src="https://i.ibb.co/B2XybXN/ABU-UBAIDAH-750x430-1.jpg"
+              alt="Rounded avatar"
+            />
+          </div>
+          {/* writer image  */}
+
+          {/* writer name  */}
+
+          <div className="writerName   ">
+            <p className=" text-gray-800 font-semibold text-sm sm:text-base ">
+              Writer name
+            </p>
+            <p className=" text-gray-700 font-medium text-xs xsm:text-sm sm:text-base ">
+              12-2-2023{" "}
+            </p>
+          </div>
+
+          {/* writer name  */}
+        </div>
+        {/* writer info ends */}
+
+        {/* user comment  */}
+        <div className="userComment  paragraphFont text-sm sm:text-base   ">
+          <p>
+            {" "}
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore qui
+            excepturi illum aperiam accusamus voluptatum quasi reprehenderit eum
+            recusandae.{" "}
+          </p>
+        </div>
+        {/* user comment  */}
+
+        {/*  */}
+      </div>
+    </div>
+  );
+};
+
+export default UserComment;
