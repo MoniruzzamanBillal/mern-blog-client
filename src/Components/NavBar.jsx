@@ -30,7 +30,9 @@ const NavBar = () => {
 
         {/* nav middle  */}
         <div className="navMid  ">
-          <h1 className="  text-xl sm:text-2xl logoFont ">MonirBlog</h1>
+          <Link to="/">
+            <h1 className="  text-xl sm:text-2xl logoFont ">MonirBlog</h1>
+          </Link>
         </div>
         {/* nav middle  */}
 

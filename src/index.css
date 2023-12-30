@@ -27,3 +27,10 @@
 .headingFont {
   font-family: "Libre Baskerville", serif;
 }
+
+.bgImage {
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  background-position: center center;
+}

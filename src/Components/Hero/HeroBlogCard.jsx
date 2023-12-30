@@ -33,7 +33,7 @@ const HeroBlogCard = () => {
 
                 <div className="mt-auto">
                   <Link
-                    to={`/`}
+                    to={`/detail/id`}
                     className="inline-block rounded-lg bg-gray-300 hover:shadow-md hover:scale-105 active:scale-100 active:bg-gray-500 px-8 py-3 text-center text-sm font-semibold text-gray-800 hover:text-gray-100 outline-none ring-indigo-300 transition duration-100 hover:bg-gray-400  focus-visible:ring  md:text-base"
                   >
                     Read more

@@ -46,7 +46,7 @@ const BlogCard = () => {
 
                 <div className="mt-auto">
                   <Link
-                    to={`/`}
+                    to={`/detail/id`}
                     className="inline-block rounded-lg bg-gray-300 px-8 py-3 text-center text-sm font-semibold text-gray-800 hover:text-gray-50 outline-none ring-indigo-300 hover:bg-gray-400 hover:shadow-md hover:scale-105 active:scale-100 transition-all duration-300 focus-visible:ring active:bg-gray-500 md:text-base"
                   >
                     Read more
