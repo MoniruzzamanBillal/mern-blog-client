@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const HeroBlogCard = () => {
   return (
     <div className="heroBlogContainer">
-      <div className="heroBlogWrapper">
+      <div className="heroBlogWrapper  ">
         <div className=" ">
           <div className="mx-auto max-w-screen-2xl ">
             <div className="flex flex-col overflow-hidden rounded-lg  sm:flex-row md:h-80">
