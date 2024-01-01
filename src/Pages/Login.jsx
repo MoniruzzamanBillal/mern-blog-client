@@ -1,6 +1,15 @@
 import { useForm } from "react-hook-form";
-
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { loggedInSuccessfully } from "../Util/ToastFunction";
+import { auth } from "../Util/Firebase.config";
+import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 const Login = () => {
+  const location = useLocation();
+
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -12,6 +21,22 @@ const Login = () => {
     // console.log(data);
     const userEmail = data?.email;
     const userPassword = data?.password;
+    loggedInSuccessfully();
+  };
+
+  // function for login  with google
+  const googleLogin = () => {
+    console.log("google ");
+
+    const provider = new GoogleAuthProvider(auth);
+
+    signInWithPopup(auth, provider).then((response) => {
+      // console.log(response);
+      loggedInSuccessfully();
+      setTimeout(() => {
+        navigate(location?.state ? location.state : "/");
+      }, 1000);
+    });
   };
 
   return (
@@ -73,7 +98,7 @@ const Login = () => {
                 <div role="status">
                   <svg
                     aria-hidden="true"
-                    class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+                    className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
                     viewBox="0 0 100 101"
                     fill="none"
                     xmlns="http://www.w3.org/2000/svg"
@@ -87,16 +112,23 @@ const Login = () => {
                       fill="currentFill"
                     />
                   </svg>
-                  <span class="sr-only">Loading...</span>
+                  <span className="sr-only">Loading...</span>
                 </div>
               ) : (
                 "Log in"
               )}
             </button>
+          </form>
 
-            <button class="flex items-center justify-center gap-2 rounded border border-gray-300 bg-gray-100 px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-gray-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base">
+          {/* google login button  */}
+
+          <div className="googleLogin  mt-6 flex justify-center  ">
+            <button
+              onClick={() => googleLogin()}
+              className="flex items-center justify-center gap-2 rounded border border-gray-300 bg-gray-100 px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-gray-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
+            >
               <svg
-                class="h-5 w-5 shrink-0"
+                className="h-5 w-5 shrink-0"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -122,9 +154,22 @@ const Login = () => {
               </svg>
               Continue with Google
             </button>
-          </form>
+          </div>
+
+          {/* google login button ends  */}
+
+          <div className="registerDivert  mt-4 text-lg text-center  ">
+            <p>
+              Don't have an account ?{" "}
+              <span className=" text-blue-500 logoFont ">
+                {" "}
+                <Link to={"/register"}>Register here</Link>{" "}
+              </span>
+            </p>
+          </div>
         </div>
       </div>
+      <ToastContainer />
     </div>
   );
 };

@@ -14,8 +14,10 @@ const NavLinks = [
 ];
 
 import { motion } from "framer-motion";
+import UseAuth from "../Hooks/UseAuth";
 const NavBar = () => {
   const [isSidebarActive, setIsSidebarActive] = useState(false);
+  const { user } = UseAuth();
 
   return (
     <div className="navContainer fixed w-full  backdrop-blur  ">
@@ -38,6 +40,17 @@ const NavBar = () => {
 
         {/* nav right  */}
         <div className=" navRight navLinkFont text-xl hidden sm:flex justify-between items-center gap-3  ">
+          {/* avatar starts  */}
+          <div className="abatar  flex justify-between items-center self-center gap-1.5 ">
+            <p className=" text-sm ">user name </p>
+            <img
+              className="w-7 h-7 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+              src="/docs/images/people/profile-picture-5.jpg"
+              alt="Bordered avatar"
+            />
+          </div>
+          {/* avatar ends  */}
+
           {/* nav link  */}
           <div className="navLinks     ">
             {NavLinks &&
@@ -54,16 +67,19 @@ const NavBar = () => {
               ))}
           </div>
           {/* nav link  */}
-
           {/* creatye button  */}
           <div className="createBtn ">
             <Link>Create</Link>
           </div>
-
           {/* creatye button  */}
-
           {/* login button  */}
           <div className="loginButton  ">
+            {/* {
+            user && user ? "avatar" :  <Link to="/login">
+            <button>Login</button>
+          </Link>
+            } */}
+
             <Link to="/login">
               <button>Login</button>
             </Link>
