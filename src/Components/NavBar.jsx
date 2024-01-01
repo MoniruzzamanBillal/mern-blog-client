@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FaLinkedin, FaGithubSquare, FaFacebookSquare } from "react-icons/fa";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const NavLinks = [
   {
@@ -15,33 +17,64 @@ const NavLinks = [
 
 import { motion } from "framer-motion";
 import UseAuth from "../Hooks/UseAuth";
+import { signOut } from "firebase/auth";
+import { auth } from "../Util/Firebase.config";
+import { logoutSuccessFully } from "../Util/ToastFunction";
 const NavBar = () => {
   const [isSidebarActive, setIsSidebarActive] = useState(false);
   const { user, loading, sum } = UseAuth();
 
-  console.log(user);
+  // console.log(user);
+
+  // logout function
+  const logoutFunction = () => {
+    console.log("log out ");
+    signOut(auth).then(() => {
+      logoutSuccessFully();
+    });
+  };
 
   return (
     <div className="navContainer fixed w-full  backdrop-blur  ">
-      <motion.div className=" navWrapper w-[97%] xsm:w-[94%] sm:w-[92%] m-auto   bg-blue-100 flex justify-between items-center self-center drop-shadow-md  backdrop-blur px-2 py-2 rounded-b-md ">
+      <motion.div
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        transition={{ duration: 0.1 }}
+        className=" navWrapper w-[97%] xsm:w-[94%] sm:w-[92%] m-auto   bg-blue-100 flex justify-between items-center self-center drop-shadow-md  backdrop-blur px-2 py-2 rounded-b-md "
+      >
         {/* nav left  */}
-        <div className="navLeft text-xl sm:text-2xl flex justify-evenly gap-1 sm:gap-2 ">
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.2, delay: 0.5 }}
+          className="navLeft text-xl sm:text-2xl flex justify-evenly gap-1 sm:gap-2 "
+        >
           <FaLinkedin className=" cursor-pointer hover:text-blue-800 " />
           <FaGithubSquare className=" cursor-pointer hover:text-gray-700 " />
           <FaFacebookSquare className=" cursor-pointer hover:text-blue-900  " />
-        </div>
+        </motion.div>
         {/* nav left  */}
 
         {/* nav middle  */}
-        <div className="navMid  ">
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.2, delay: 0.5 }}
+          className="navMid  "
+        >
           <Link to="/">
             <h1 className="  text-xl sm:text-2xl logoFont ">MonirBlog</h1>
           </Link>
-        </div>
+        </motion.div>
         {/* nav middle  */}
 
         {/* nav right  */}
-        <div className=" navRight navLinkFont text-xl hidden sm:flex justify-between items-center gap-3  ">
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.2, delay: 0.5 }}
+          className=" navRight navLinkFont text-xl hidden sm:flex justify-between items-center gap-3  "
+        >
           {/* avatar starts  */}
 
           {user && (
@@ -80,18 +113,16 @@ const NavBar = () => {
           {/* creatye button  */}
           {/* login button  */}
           <div className="loginButton  ">
-            {/* {
-            user && user ? "avatar" :  <Link to="/login">
-            <button>Login</button>
-          </Link>
-            } */}
-
-            <Link to="/login">
-              <button>Login</button>
-            </Link>
+            {user && user ? (
+              <button onClick={() => logoutFunction()}>Log out</button>
+            ) : (
+              <Link to="/login">
+                <button>Login</button>
+              </Link>
+            )}
           </div>
           {/* login button  */}
-        </div>
+        </motion.div>
 
         {/* mobile menu  */}
 
@@ -160,6 +191,7 @@ const NavBar = () => {
 
         {/* nav right  */}
       </motion.div>
+      <ToastContainer />
     </div>
   );
 };
