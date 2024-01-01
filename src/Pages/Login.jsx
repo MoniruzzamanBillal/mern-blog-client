@@ -15,14 +15,14 @@ const Login = () => {
   return (
     <div className="loginContainer bg-red-200  ">
       <div className="loginWrapper  h-screen bg-[url('https://i.ibb.co/6bsNLj8/hosting-login.jpg')] bgImage flex justify-center items-center  ">
-        <div className="loginCard bg-white  shadow-2xl  py-9 px-4 w-[45%] rounded    ">
-          <h1 className="  headingFont text-2xl font-medium mb-10 text-center  ">
+        <div className="loginCard bg-white  shadow-2xl  py-9 px-4 w-[92%] xsm:w-[82%] sm:w-[72%] md:w-[64%] xmd:w-[55%] lg:w-[46%] rounded border border-gray-200    ">
+          <h1 className="  headingFont text-xl sm:text-2xl font-bold xsm:font-semibold sm:font-medium mb-10 text-center  ">
             Login to your account{" "}
           </h1>
 
           <form
             onSubmit={handleSubmit(handleLogin)}
-            className="  w-[70%] m-auto flex flex-col gap-8  "
+            className=" w-[92%] xsm:w-[80%] sm:w-[76%] md:w-[72%] m-auto flex flex-col gap-8  "
           >
             <input
               type="email"
