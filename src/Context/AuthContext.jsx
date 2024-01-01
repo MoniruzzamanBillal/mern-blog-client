@@ -1,5 +1,5 @@
-import { createContext, useState } from "react";
-import UseAuth from "../Hooks/UseAuth";
+import { createContext, useEffect, useState } from "react";
+
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../Util/Firebase.config";
 
@@ -9,11 +9,13 @@ export const AppProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
+  const [sum, setSum] = useState("sum is 10 ");
 
-  UseAuth(() => {
+  useEffect(() => {
     setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
+      console.log(currentUser);
 
       setLoading(false);
     });
@@ -26,6 +28,7 @@ export const AppProvider = ({ children }) => {
     user,
     loading,
     darkMode,
+    sum,
   };
 
   return (

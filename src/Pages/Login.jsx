@@ -5,10 +5,14 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { loggedInSuccessfully } from "../Util/ToastFunction";
 import { auth } from "../Util/Firebase.config";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
+import UseAuth from "../Hooks/UseAuth";
 const Login = () => {
+  const { user, loading, sum } = UseAuth();
   const location = useLocation();
 
   const navigate = useNavigate();
+
+  console.log(sum);
 
   const {
     register,
