@@ -14,6 +14,8 @@ const Login = () => {
 
   const navigate = useNavigate();
 
+  console.log(location);
+
   const {
     register,
     handleSubmit,

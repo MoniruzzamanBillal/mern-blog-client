@@ -108,7 +108,7 @@ const NavBar = () => {
           {/* nav link  */}
           {/* creatye button  */}
           <div className="createBtn ">
-            <Link>Create</Link>
+            <Link to={"/create"}>Create</Link>
           </div>
           {/* creatye button  */}
           {/* login button  */}

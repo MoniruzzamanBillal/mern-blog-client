@@ -5,6 +5,7 @@ import Login from "../Pages/Login";
 import About from "../Pages/About";
 import Register from "../Pages/Register";
 import Detail from "../Pages/Detail";
+import CreatePost from "../Pages/CreatePost";
 
 export const PageRouter = createBrowserRouter([
   {
@@ -18,6 +19,10 @@ export const PageRouter = createBrowserRouter([
       {
         path: "/about",
         element: <About />,
+      },
+      {
+        path: "/create",
+        element: <CreatePost />,
       },
       {
         path: "/detail/:id",
