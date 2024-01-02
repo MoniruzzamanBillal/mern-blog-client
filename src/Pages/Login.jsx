@@ -6,9 +6,10 @@ import { loggedInSuccessfully } from "../Util/ToastFunction";
 import { auth } from "../Util/Firebase.config";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import UseAuth from "../Hooks/UseAuth";
+import { animate, motion } from "framer-motion";
 
 const Login = () => {
-  const { user, loading, sum, loginFunction } = UseAuth();
+  const { user, loading, loginFunction } = UseAuth();
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -23,16 +24,12 @@ const Login = () => {
   const handleLogin = (data) => {
     const userEmail = data?.email;
     const userPassword = data?.password;
-
     loginFunction(userEmail, userPassword)
       .then((response) => {
-        // console.log(response);
         loggedInSuccessfully();
-
         setTimeout(() => {
           navigate(location?.state ? location.state : "/");
         }, 1000);
-
         reset();
       })
       .catch((error) => console.log(error));
@@ -53,20 +50,54 @@ const Login = () => {
     });
   };
 
+  // framer motion varients
+  const inputVarients = {
+    hidden: {
+      y: 30,
+      opacity: 0,
+    },
+    animate: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
   return (
     <div className="loginContainer  ">
       <div className="loginWrapper  h-screen bg-[url('https://i.ibb.co/6bsNLj8/hosting-login.jpg')] bgImage flex justify-center items-center  ">
-        <div className="loginCard bg-white  shadow-2xl  py-9 px-4 w-[92%] xsm:w-[82%] sm:w-[72%] md:w-[64%] xmd:w-[55%] lg:w-[46%] rounded border border-gray-200    ">
-          <h1 className="  headingFont text-xl sm:text-2xl font-bold xsm:font-semibold sm:font-medium mb-10 text-center  ">
+        <motion.div
+          initial={{ y: 120, opacity: 0 }}
+          animate={{
+            y: 0,
+            opacity: 1,
+            transition: {
+              duration: 0.6,
+            },
+          }}
+          className="loginCard bg-white  shadow-2xl  py-9 px-4 w-[92%] xsm:w-[82%] sm:w-[72%] md:w-[64%] xmd:w-[55%] lg:w-[46%] rounded border border-gray-200    "
+        >
+          <motion.h1
+            variants={inputVarients}
+            initial={"hidden"}
+            animate={"animate"}
+            transition={{ duration: 0.3, delay: 0.1 }}
+            className="  headingFont text-xl sm:text-2xl font-bold xsm:font-semibold sm:font-medium mb-10 text-center  "
+          >
             Login to your account{" "}
-          </h1>
+          </motion.h1>
 
           <form
             onSubmit={handleSubmit(handleLogin)}
             className=" w-[92%] xsm:w-[80%] sm:w-[76%] md:w-[72%] m-auto flex flex-col gap-8  "
           >
             {/* email input  */}
-            <div className="emailInput">
+            <motion.div
+              variants={inputVarients}
+              initial={"hidden"}
+              animate={"animate"}
+              transition={{ duration: 0.3, delay: 0.3 }}
+              className="emailInput"
+            >
               <input
                 type="email"
                 id="email"
@@ -82,11 +113,17 @@ const Login = () => {
                   {errors.email.message}
                 </p>
               )}
-            </div>
+            </motion.div>
             {/* email input  */}
 
             {/* password input  */}
-            <div className="passwordInput">
+            <motion.div
+              variants={inputVarients}
+              initial={"hidden"}
+              animate={"animate"}
+              transition={{ duration: 0.3, delay: 0.5 }}
+              className="passwordInput"
+            >
               <input
                 type="password"
                 id="password"
@@ -101,10 +138,14 @@ const Login = () => {
                   {errors.password.message}
                 </p>
               )}
-            </div>
+            </motion.div>
             {/* password input  */}
 
-            <button
+            <motion.button
+              variants={inputVarients}
+              initial={"hidden"}
+              animate={"animate"}
+              transition={{ duration: 0.3, delay: 0.7 }}
               disabled={isSubmitting}
               className=" w-full  py-2 rounded  bg-sky-500 hover:bg-sky-600 navLinkFont text-gray-50 font-medium  text-lg flex justify-center items-center "
             >
@@ -131,12 +172,18 @@ const Login = () => {
               ) : (
                 "Log in"
               )}
-            </button>
+            </motion.button>
           </form>
 
           {/* google login button  */}
 
-          <div className="googleLogin  mt-6 flex justify-center  ">
+          <motion.div
+            variants={inputVarients}
+            initial={"hidden"}
+            animate={"animate"}
+            transition={{ duration: 0.3, delay: 0.8 }}
+            className="googleLogin  mt-6 flex justify-center  "
+          >
             <button
               onClick={() => googleLogin()}
               className="flex items-center justify-center gap-2 rounded border border-gray-300 bg-gray-100 px-8 py-3 text-center text-sm font-semibold text-gray-800 outline-none ring-gray-300 transition duration-100 hover:bg-gray-100 focus-visible:ring active:bg-gray-200 md:text-base"
@@ -168,11 +215,17 @@ const Login = () => {
               </svg>
               Continue with Google
             </button>
-          </div>
+          </motion.div>
 
           {/* google login button ends  */}
 
-          <div className="registerDivert  mt-4 text-lg text-center  ">
+          <motion.div
+            variants={inputVarients}
+            initial={"hidden"}
+            animate={"animate"}
+            transition={{ duration: 0.3, delay: 0.9 }}
+            className="registerDivert  mt-4 text-lg text-center  "
+          >
             <p>
               Don't have an account ?{" "}
               <span className=" text-blue-500 logoFont ">
@@ -180,8 +233,8 @@ const Login = () => {
                 <Link to={"/register"}>Register here</Link>{" "}
               </span>
             </p>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       </div>
       <ToastContainer />
     </div>
