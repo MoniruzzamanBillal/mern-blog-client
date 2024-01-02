@@ -16,7 +16,7 @@ const detailVarient = {
 
 const Detail = () => {
   return (
-    <div className="detailContainer pb-5 ">
+    <div className="detailContainer pb-6 ">
       <motion.div className="detailWrapper  w-[98%] xsm:w-[95%] sm:w-[92%]  m-auto ">
         {/* detail top section  */}
         <div className="detailTop   flex flex-col md:flex-row gap-9 md:gap-0 justify-evenly items-center mb-6 sm:mb-7 md:mb-10 xmd:mb-12 lg:mb-16 ">
