@@ -35,7 +35,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navContainer fixed w-full  backdrop-blur  ">
+    <div className="navContainer fixed w-full  backdrop-blur z-[10] ">
       <motion.div
         initial={{ y: -100 }}
         animate={{ y: 0 }}

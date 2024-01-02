@@ -1,14 +1,26 @@
 import React from "react";
 import UserComment from "./UserComment";
-
+import { motion } from "framer-motion";
 const Comment = () => {
   return (
     <div className="commentContainer   ">
-      <div className="commentWrapper  ">
-        <h1 className="headingFont font-semibold text-2xl mb-7  ">Comments </h1>
+      <motion.div className="commentWrapper  ">
+        <motion.h1
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="headingFont font-semibold text-2xl mb-7  "
+        >
+          Comments{" "}
+        </motion.h1>
 
         {/* comment input  */}
-        <div className="inputSection  mb-9 ">
+        <motion.div
+          initial={{ y: 30, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.2 }}
+          className="inputSection  mb-9 "
+        >
           {/*  */}
 
           <div className="w-full mb-4 border border-gray-200  bg-gray-50 ">
@@ -35,7 +47,7 @@ const Comment = () => {
           </div>
 
           {/*  */}
-        </div>
+        </motion.div>
         {/* comment input ends */}
 
         {/* user comment section  */}
@@ -47,7 +59,7 @@ const Comment = () => {
         {/* user comment section  */}
 
         {/*  */}
-      </div>
+      </motion.div>
     </div>
   );
 };

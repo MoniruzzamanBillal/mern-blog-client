@@ -1,11 +1,17 @@
+import { motion } from "framer-motion";
 import React from "react";
 
 const UserComment = () => {
   return (
     <div className="UserCommentContainer   ">
-      <div className="UserCommentWrapper   ">
+      <motion.div className="UserCommentWrapper   ">
         {/* writer info starts  */}
-        <div className="writerInfo  flex items-center gap-2 mb-1.5  ">
+        <motion.div
+          initial={{ y: 10, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.1 }}
+          className="writerInfo  flex items-center gap-2 mb-1.5  "
+        >
           {/* writer image  */}
           <div className="writerImg   ">
             <img
@@ -28,22 +34,27 @@ const UserComment = () => {
           </div>
 
           {/* writer name  */}
-        </div>
+        </motion.div>
         {/* writer info ends */}
 
         {/* user comment  */}
-        <div className="userComment  paragraphFont text-sm sm:text-base   ">
+        <motion.div
+          initial={{ y: 20, opacity: 0 }}
+          whileInView={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="userComment  paragraphFont text-sm sm:text-base   "
+        >
           <p>
             {" "}
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore qui
             excepturi illum aperiam accusamus voluptatum quasi reprehenderit eum
             recusandae.{" "}
           </p>
-        </div>
+        </motion.div>
         {/* user comment  */}
 
         {/*  */}
-      </div>
+      </motion.div>
     </div>
   );
 };

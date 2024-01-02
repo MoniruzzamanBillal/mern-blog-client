@@ -1,15 +1,33 @@
 import React from "react";
 import PopularPostCard from "../Components/Hero/PopularPostCard";
 import Comment from "../Components/Detail/Comment";
+import { motion } from "framer-motion";
+
+const detailVarient = {
+  hidden: {
+    y: 30,
+    opacity: 0,
+  },
+  animate: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
 const Detail = () => {
   return (
-    <div className="detailContainer  ">
-      <div className="detailWrapper  w-[98%] xsm:w-[95%] sm:w-[92%]  m-auto ">
+    <div className="detailContainer pb-5 ">
+      <motion.div className="detailWrapper  w-[98%] xsm:w-[95%] sm:w-[92%]  m-auto ">
         {/* detail top section  */}
         <div className="detailTop   flex flex-col md:flex-row gap-9 md:gap-0 justify-evenly items-center mb-6 sm:mb-7 md:mb-10 xmd:mb-12 lg:mb-16 ">
           {/* detail left starts  */}
-          <div className="detailLeft  w-[94%] xsm:w-[90%] sm:w-[85%] md:w-[55%]  ">
+          <motion.div
+            variants={detailVarient}
+            initial="hidden"
+            whileInView={"animate"}
+            transition={{ duration: 0.3, delay: 0.2 }}
+            className="detailLeft  w-[94%] xsm:w-[90%] sm:w-[85%] md:w-[55%]  "
+          >
             {/* left heading  */}
 
             <h1 className="  font-bold text-xl xsm:text-2xl sm:text-3xl xmd:text-4xl headingFont mb-4 leading-relaxed  ">
@@ -46,11 +64,17 @@ const Detail = () => {
             {/* writer info ends */}
 
             {/*  */}
-          </div>
+          </motion.div>
           {/* detail left ends */}
 
           {/* detail right  */}
-          <div className="detailRight  w-[92%] xsm:w-[85%] sm:w-[72%] md:w-[41%] ">
+          <motion.div
+            variants={detailVarient}
+            initial="hidden"
+            whileInView={"animate"}
+            transition={{ duration: 0.3, delay: 0.2 }}
+            className="detailRight  w-[92%] xsm:w-[85%] sm:w-[72%] md:w-[41%] "
+          >
             {/* right image  */}
             <div className="rightImg  h-[18rem] sm:h-[19rem]  md:h-[15rem] xmd:h-[16rem] lg:h-[18rem] rounded-md overflow-auto ">
               <img
@@ -60,7 +84,7 @@ const Detail = () => {
               />
             </div>
             {/* right image  */}
-          </div>
+          </motion.div>
           {/* detail right  */}
         </div>
         {/* detail top section  ends */}
@@ -69,10 +93,16 @@ const Detail = () => {
 
         {/* detail paragraph container  */}
 
-        <div className="detailCOntainer  flex justify-between ">
+        <div className="detailCOntainer  flex justify-between  ">
           <div className="detailParagraphContainer w-[97%] xsm:w-[94%] sm:w-[90%] xmd:w-[68%] paragraphFont text-sm xsm:text-base sm:text-lg m-auto    ">
             {/* detail paragraph  */}
-            <div className="detailParagraph    ">
+            <motion.div
+              variants={detailVarient}
+              initial="hidden"
+              whileInView={"animate"}
+              transition={{ duration: 0.3, delay: 0.2 }}
+              className="detailParagraph    "
+            >
               <p className="  mb-4 ">
                 Conventional development methodologies and tools face challenges
                 when it comes to component isolation. With the growing
@@ -108,7 +138,7 @@ const Detail = () => {
               </p>
 
               {/*  */}
-            </div>
+            </motion.div>
             {/* detail paragraph ends */}
 
             {/* comment section starts  */}
@@ -122,9 +152,14 @@ const Detail = () => {
 
           {/* most popular post container */}
           <div className="mostPopularContainer  hidden xmd:block  xmd:w-[27%] p-1  ">
-            <h1 className="   text-lg lg:text-2xl font-semibold text-gray-800 mb-3 lg:mb-6 ">
+            <motion.h1
+              initial={{ y: 35, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.2 }}
+              className="   text-lg lg:text-2xl font-semibold text-gray-800 mb-3 lg:mb-6 "
+            >
               Most popular
-            </h1>
+            </motion.h1>
 
             {/* popular post card  */}
             <div className="popularPost grid grid-cols-1 gap-12  ">
@@ -141,7 +176,7 @@ const Detail = () => {
         {/* detail paragraph ends */}
 
         {/*  */}
-      </div>
+      </motion.div>
     </div>
   );
 };
