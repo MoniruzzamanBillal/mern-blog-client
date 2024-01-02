@@ -6,7 +6,7 @@ import { loggedInSuccessfully } from "../Util/ToastFunction";
 import { auth } from "../Util/Firebase.config";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import UseAuth from "../Hooks/UseAuth";
-import { animate, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 const Login = () => {
   const { user, loading, loginFunction } = UseAuth();

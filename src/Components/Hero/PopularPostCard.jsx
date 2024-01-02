@@ -1,29 +1,65 @@
+import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const PopularPostCard = () => {
+  const cardVarient = {
+    hidden: {
+      y: 15,
+      opacity: 0,
+    },
+
+    animate: {
+      y: 0,
+      opacity: 1,
+    },
+  };
+
   return (
     <Link to={"/detail/id"}>
-      <div className="PopularPostCardContainer cursor-pointer ">
-        <div className="PopularPostCardWrapper  p-2 border-y border-gray-100 bg-gray-50 shadow hover:shadow-md ">
+      <motion.div
+        initial={{ y: 60, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.4 }}
+        className="PopularPostCardContainer cursor-pointer "
+      >
+        <div className="PopularPostCardWrapper  p-4 border border-gray-200 bg-blue-50 shadow-md hover:shadow-xl ">
           {/* category btn  */}
-          <div className="category mb-1.5 lg:mb-3 ">
+          <motion.div
+            variants={cardVarient}
+            initial="hidden"
+            whileInView={"animate"}
+            transition={{ duration: 0.4, delay: 0.3 }}
+            className="category mb-1.5 lg:mb-3 "
+          >
             <p className=" py-1.5 px-2 text-xs lg:text-sm text-gray-100  rounded-md bg-fuchsia-600 font-semibold inline  ">
               Category
             </p>
-          </div>
+          </motion.div>
           {/* category btn  */}
 
           {/* heading starts  */}
-          <div className="heading  mb-2  ">
-            <h1 className=" text-xl lg:text-2xl font-medium text-gray-700 ">
+          <motion.div
+            variants={cardVarient}
+            initial="hidden"
+            whileInView={"animate"}
+            transition={{ duration: 0.4, delay: 0.4 }}
+            className="heading  mb-2  "
+          >
+            <h1 className=" text-lg lg:text-xl font-medium text-gray-700 ">
               Simple way to innovate your inovation
             </h1>
-          </div>
+          </motion.div>
           {/* heading ends */}
 
           {/* blog writer info starts  */}
-          <div className="writerInfo  flex gap-1 items-center text-sm lg:text-base ">
+          <motion.div
+            variants={cardVarient}
+            initial="hidden"
+            whileInView={"animate"}
+            transition={{ duration: 0.4, delay: 0.5 }}
+            className="writerInfo  flex gap-1 items-center text-sm lg:text-base "
+          >
             {/* writer name  */}
             <p className="  font-medium  ">writer name -</p>
             {/* writer name  */}
@@ -31,10 +67,10 @@ const PopularPostCard = () => {
             {/* date  */}
             <p className="  "> 14-12-2023</p>
             {/* date  */}
-          </div>
+          </motion.div>
           {/* blog writer info ends */}
         </div>
-      </div>
+      </motion.div>
     </Link>
   );
 };
