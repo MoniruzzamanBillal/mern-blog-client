@@ -1,6 +1,9 @@
 import { createContext, useEffect, useState } from "react";
 
-import { onAuthStateChanged } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  onAuthStateChanged,
+} from "firebase/auth";
 import { auth } from "../Util/Firebase.config";
 
 export const AppContext = createContext();
@@ -11,11 +14,16 @@ export const AppProvider = ({ children }) => {
   const [darkMode, setDarkMode] = useState(false);
   const [sum, setSum] = useState("sum is 10 ");
 
+  // function for register a user
+  const registerFunction = (email, password) => {
+    return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  // effect to handle user
   useEffect(() => {
     setLoading(true);
     const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
       setUser(currentUser);
-      console.log(currentUser);
 
       setLoading(false);
     });
@@ -29,6 +37,7 @@ export const AppProvider = ({ children }) => {
     loading,
     darkMode,
     sum,
+    registerFunction,
   };
 
   return (

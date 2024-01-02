@@ -4,8 +4,12 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { registerSuccessfully } from "../Util/ToastFunction";
 import { motion } from "framer-motion";
+import UseAuth from "../Hooks/UseAuth";
+import { updateProfile } from "firebase/auth";
 
 const Register = () => {
+  const { registerFunction } = UseAuth();
+
   const {
     register,
     getValues,
@@ -15,23 +19,31 @@ const Register = () => {
   } = useForm();
 
   // registration function
-  const handleRegister = (data) => {
+  const handleRegister = async (data) => {
     console.log("register");
-
-    registerSuccessfully();
-
-    // console.log(data);
 
     const userEmail = data?.email;
     const userName = data?.userName;
     const userPassword = data?.password;
     const userImage = data?.file_input[0];
 
+    const registerResponse = await registerFunction(userEmail, userPassword);
+
+    console.log(registerResponse?.user);
+
+    if (registerResponse?.user) {
+      updateProfile(registerResponse?.user, {
+        displayName: userName,
+      }).then((response) => {
+        // console.log(response);
+        registerSuccessfully();
+      });
+    }
+
     // reset();
   };
 
-  // transition={{ duration: 0.3, delay: 0.3 }}
-
+  // framer motion varients
   const inputVarients = {
     hidden: {
       y: 30,
@@ -212,10 +224,10 @@ const Register = () => {
               whileInView={"animate"}
               transition={{ duration: 0.3, delay: 0.7 }}
               disabled={isSubmitting}
-              className=" w-full  py-2 rounded  bg-sky-500 hover:bg-sky-600 navLinkFont text-gray-50 font-medium  text-lg "
+              className=" w-full  py-2 rounded  bg-sky-500 hover:bg-sky-600 navLinkFont text-gray-50 font-medium  text-lg  flex justify-center items-center "
             >
               {isSubmitting ? (
-                <div role="status">
+                <div role="status  ">
                   <svg
                     aria-hidden="true"
                     className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
