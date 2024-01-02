@@ -8,7 +8,7 @@ import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import UseAuth from "../Hooks/UseAuth";
 
 const Login = () => {
-  const { user, loading, sum } = UseAuth();
+  const { user, loading, sum, loginFunction } = UseAuth();
   const location = useLocation();
 
   const navigate = useNavigate();
@@ -21,12 +21,21 @@ const Login = () => {
   } = useForm();
 
   const handleLogin = (data) => {
-    // console.log("login click");
-    // console.log(data);
     const userEmail = data?.email;
     const userPassword = data?.password;
-    loggedInSuccessfully();
-    reset();
+
+    loginFunction(userEmail, userPassword)
+      .then((response) => {
+        // console.log(response);
+        loggedInSuccessfully();
+
+        setTimeout(() => {
+          navigate(location?.state ? location.state : "/");
+        }, 1000);
+
+        reset();
+      })
+      .catch((error) => console.log(error));
   };
 
   // function for login  with google
@@ -97,7 +106,7 @@ const Login = () => {
 
             <button
               disabled={isSubmitting}
-              className=" w-full  py-2 rounded  bg-sky-500 hover:bg-sky-600 navLinkFont text-gray-50 font-medium  text-lg "
+              className=" w-full  py-2 rounded  bg-sky-500 hover:bg-sky-600 navLinkFont text-gray-50 font-medium  text-lg flex justify-center items-center "
             >
               {isSubmitting ? (
                 <div role="status">

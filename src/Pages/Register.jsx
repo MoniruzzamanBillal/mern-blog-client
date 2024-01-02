@@ -1,14 +1,17 @@
 import { useForm } from "react-hook-form";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { registerSuccessfully } from "../Util/ToastFunction";
 import { motion } from "framer-motion";
 import UseAuth from "../Hooks/UseAuth";
 import { updateProfile } from "firebase/auth";
+import axios from "axios";
+import { useState } from "react";
 
 const Register = () => {
-  const { registerFunction } = UseAuth();
+  const { registerFunction, user, logout } = UseAuth();
+  const navigate = useNavigate();
 
   const {
     register,
@@ -20,27 +23,41 @@ const Register = () => {
 
   // registration function
   const handleRegister = async (data) => {
-    console.log("register");
-
     const userEmail = data?.email;
     const userName = data?.userName;
     const userPassword = data?.password;
     const userImage = data?.file_input[0];
 
+    const formData = new FormData();
+    formData.append("image", userImage);
+
+    const imageResponse = await axios.post(
+      "https://api.imgbb.com/1/upload?key=00fc9e4302335a502d2035bb196a9314",
+      formData
+    );
+
+    // console.log(imageResponse?.data?.data?.display_url);
+
     const registerResponse = await registerFunction(userEmail, userPassword);
-
-    console.log(registerResponse?.user);
-
+    // console.log(registerResponse?.user);
     if (registerResponse?.user) {
       updateProfile(registerResponse?.user, {
         displayName: userName,
+        photoURL: imageResponse?.data?.data?.display_url,
+        // photoURL: imageUrl,
       }).then((response) => {
         // console.log(response);
-        registerSuccessfully();
+
+        logout().then(() => {
+          registerSuccessfully();
+          setTimeout(() => {
+            navigate("/login");
+          }, 1200);
+        });
       });
     }
 
-    // reset();
+    reset();
   };
 
   // framer motion varients

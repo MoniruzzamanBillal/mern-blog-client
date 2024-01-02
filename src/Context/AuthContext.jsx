@@ -3,6 +3,8 @@ import { createContext, useEffect, useState } from "react";
 import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { auth } from "../Util/Firebase.config";
 
@@ -17,6 +19,16 @@ export const AppProvider = ({ children }) => {
   // function for register a user
   const registerFunction = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
+  };
+
+  // function for login a user
+  const loginFunction = (email, password) => {
+    return signInWithEmailAndPassword(auth, email, password);
+  };
+
+  // function for logout a user
+  const logout = () => {
+    return signOut(auth);
   };
 
   // effect to handle user
@@ -38,6 +50,8 @@ export const AppProvider = ({ children }) => {
     darkMode,
     sum,
     registerFunction,
+    logout,
+    loginFunction,
   };
 
   return (
