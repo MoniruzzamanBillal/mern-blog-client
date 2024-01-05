@@ -1,11 +1,24 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HeroBlogCard from "./HeroBlogCard";
 import Category from "./Category";
 import RecentPost from "./RecentPost";
 
 import { motion } from "framer-motion";
+import GetBlogs from "../../Hooks/GetBlogs";
 
 const Hero = () => {
+  const [blogs, setBlogs] = useState([]);
+
+  const [blogsData, blogsDataLoading, blogsReFetch] = GetBlogs();
+
+  // console.log(blogsData?.data?.result);
+
+  useEffect(() => {
+    setBlogs(blogsData?.data?.result);
+  }, []);
+
+  console.log(blogs);
+
   return (
     <div className="heroContainer mt-0 xsm:mt-3 sm:mt-5 md:mt-6  ">
       <motion.div className="heroWrapper w-[95%] xsm:w-[92%] sm:w-[90%]  m-auto ">
