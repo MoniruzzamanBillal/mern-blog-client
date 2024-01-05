@@ -7,7 +7,6 @@ import { motion } from "framer-motion";
 import UseAuth from "../Hooks/UseAuth";
 import { updateProfile } from "firebase/auth";
 import axios from "axios";
-import { useState } from "react";
 
 const Register = () => {
   const { registerFunction, user, logout } = UseAuth();
