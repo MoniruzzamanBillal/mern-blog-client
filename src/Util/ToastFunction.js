@@ -81,3 +81,49 @@ export const logoutSuccessFully = () =>
     progress: undefined,
     theme: "colored",
   });
+
+export const titleError = () =>
+  toast.error("Title is required", {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+export const contentError = () =>
+  toast.error("Content is required", {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+export const titleImageError = () =>
+  toast.error("Title image is required", {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+
+export const blogAddedSuccessfully = () =>
+  toast.success("Blog added successfully!", {
+    position: "top-center",
+    autoClose: 1100,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });

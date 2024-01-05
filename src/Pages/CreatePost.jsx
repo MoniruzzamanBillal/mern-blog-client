@@ -2,6 +2,15 @@ import axios from "axios";
 import React, { useState } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import {
+  blogAddedSuccessfully,
+  contentError,
+  titleError,
+  titleImageError,
+} from "../Util/ToastFunction";
+import UseAxiosPublic from "../Hooks/UseAxiosPublic";
 
 const modules = {
   toolbar: [
@@ -22,6 +31,7 @@ const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
   const [titleImg, setTitleImg] = useState(null);
+  const axiosPublic = UseAxiosPublic();
 
   // function for changing title image
   const handleImage = async (e) => {
@@ -39,15 +49,32 @@ const CreatePost = () => {
   };
 
   const handleSubmit = () => {
-    console.log("submit click");
+    const favCount = 0;
+    const blogData = {
+      title,
+      titleImg,
+      description: value,
+      favCount,
+    };
+
+    // console.log(blogData);
+
+    axiosPublic
+      .post("/api//blog/post", blogData)
+      .then((response) => {
+        console.log(response?.data);
+        if (response?.data) {
+          blogAddedSuccessfully();
+        }
+      })
+      .catch((err) => console.log(err));
   };
-  // console.log(value);
-  // console.log(title);
+
   return (
     <div className="createPostContainer   ">
       <div className="createPostWrapper w-[95%] xsm:w-[92%] sm:w-[90%]  m-auto  pb-4 ">
         {/* title container  */}
-        <div className="titleContainer  mb-2   ">
+        <div className="titleContainer   mb-2   ">
           <input
             className=" block w-full py-4 px-4 text-2xl border-none outline-none   text-gray-600 font-medium "
             type="text"
@@ -85,11 +112,17 @@ const CreatePost = () => {
         {/* text editor ends  */}
 
         {/* submit button  */}
-        <div className="submit bg-red-300 pt-5 text-center ">
-          <button className=" bg-violet-500 py-2 px-4 ">Submit</button>
+        <div className="submit  pt-5 text-center  ">
+          <button
+            onClick={() => handleSubmit()}
+            className=" cursor-pointer text-gray-50 bg-violet-500 hover:bg-violet-700 active:scale-95 py-2 px-5 rounded font-medium headingFont  "
+          >
+            Submit
+          </button>
         </div>
         {/* submit button ends */}
       </div>
+      <ToastContainer />
     </div>
   );
 };
