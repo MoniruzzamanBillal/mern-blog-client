@@ -31,11 +31,15 @@ const CreatePost = () => {
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
   const [titleImg, setTitleImg] = useState(null);
+  const [fileName, setFileName] = useState("");
   const axiosPublic = UseAxiosPublic();
 
   // function for changing title image
   const handleImage = async (e) => {
     const imgFile = e.target.files[0];
+
+    // console.log(imgFile);
+    setFileName(imgFile?.name);
 
     const formData = new FormData();
     formData.append("image", imgFile);
@@ -48,6 +52,8 @@ const CreatePost = () => {
     setTitleImg(imageResponse?.data?.data?.display_url);
   };
 
+  // console.log(fileName);
+
   const handleSubmit = () => {
     const favCount = 0;
     const blogData = {
@@ -57,7 +63,7 @@ const CreatePost = () => {
       favCount,
     };
 
-    // console.log(blogData);
+    console.log(blogData);
 
     axiosPublic
       .post("/api//blog/post", blogData)
@@ -86,13 +92,19 @@ const CreatePost = () => {
         {/* title container ends  */}
 
         {/* title image container  */}
-        <div className="titleImage  py-3 mb-3  ">
-          <h1 className=" text-2xl font-medium mb-2 text-gray-600 ">
-            Title image :{" "}
-          </h1>
+        <div className="titleImage  py-4 mb-3   w-[44%]  border-2 border-gray-300 border-dotted ">
+          <div className="labelCOntainer  text-center  ">
+            <label
+              htmlFor="file_input"
+              className="  bg-rose-500 hover:bg-rose-600 font-medium text-gray-50 text-sm py-2 px-3 rounded-md cursor-pointer "
+            >
+              {fileName ? fileName : "  Upload title image"}
+            </label>
+          </div>
+
           <input
             onChange={(e) => handleImage(e)}
-            className="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  "
+            className=" hidden  w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50  "
             id="file_input"
             type="file"
           />
