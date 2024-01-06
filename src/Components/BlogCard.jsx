@@ -2,7 +2,9 @@ import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const BlogCard = () => {
+const BlogCard = ({ blog }) => {
+  console.log(blog);
+
   const blogVarients = {
     hidden: {
       y: 10,
@@ -36,7 +38,7 @@ const BlogCard = () => {
                 className="order-first h-48 w-full  sm:order-none sm:h-auto sm:w-1/2 lg:w-2/5"
               >
                 <img
-                  src="https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?auto=format&q=75&fit=crop&w=1000"
+                  src={blog?.titleImg}
                   loading="lazy"
                   alt="Photo by Andras Vas"
                   className="h-full w-full  object-cover object-center  "
@@ -71,10 +73,10 @@ const BlogCard = () => {
                   transition={{ duration: 0.4, delay: 0.5 }}
                   className="mb-4 text-base font-bold text-gray-800 md:text-lg lg:text-xl"
                 >
-                  Simple way to innovate your inovation
+                  {blog?.title}
                 </motion.h2>
 
-                <motion.p
+                {/* <motion.p
                   variants={blogVarients}
                   initial={"hidden"}
                   whileInView={"animate"}
@@ -84,7 +86,15 @@ const BlogCard = () => {
                   This is a section of some simple filler text, also known as
                   placeholder text. It shares some characteristics of a real
                   written text.
-                </motion.p>
+                </motion.p> */}
+                <motion.p
+                  variants={blogVarients}
+                  initial={"hidden"}
+                  whileInView={"animate"}
+                  transition={{ duration: 0.4, delay: 0.6 }}
+                  className="mb-6  text-gray-700  md:text-sm lg:text-lg "
+                  dangerouslySetInnerHTML={{ __html: blog?.description }}
+                ></motion.p>
 
                 <motion.div
                   variants={blogVarients}
@@ -94,7 +104,7 @@ const BlogCard = () => {
                   className="mt-auto"
                 >
                   <Link
-                    to={`/detail/id`}
+                    to={`/detail/${blog?._id}`}
                     className="inline-block rounded-lg bg-gray-300 px-8 py-3 text-center text-sm font-semibold text-gray-800 hover:text-gray-50 outline-none ring-indigo-300 hover:bg-gray-400 hover:shadow-md hover:scale-105 active:scale-100 transition-all duration-300 focus-visible:ring active:bg-gray-500 md:text-base"
                   >
                     Read more

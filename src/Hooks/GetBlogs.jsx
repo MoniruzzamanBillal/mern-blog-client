@@ -13,7 +13,7 @@ const GetBlogs = () => {
     queryKey: ["getBlog"],
     queryFn: async () => {
       const blogsData = await axiosPublic.get("/api/blogs");
-      return blogsData;
+      return blogsData?.data?.result;
     },
   });
 

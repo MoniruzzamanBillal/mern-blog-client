@@ -7,17 +7,7 @@ import { motion } from "framer-motion";
 import GetBlogs from "../../Hooks/GetBlogs";
 
 const Hero = () => {
-  const [blogs, setBlogs] = useState([]);
-
   const [blogsData, blogsDataLoading, blogsReFetch] = GetBlogs();
-
-  // console.log(blogsData?.data?.result);
-
-  useEffect(() => {
-    setBlogs(blogsData?.data?.result);
-  }, []);
-
-  console.log(blogs);
 
   return (
     <div className="heroContainer mt-0 xsm:mt-3 sm:mt-5 md:mt-6  ">

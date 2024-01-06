@@ -3,17 +3,23 @@ import BlogCard from "../BlogCard";
 import PopularPostCard from "./PopularPostCard";
 import Pagination from "./Pagination";
 import { motion } from "framer-motion";
+import GetBlogs from "../../Hooks/GetBlogs";
 
 const RecentPost = () => {
+  const [blogsData, blogsDataLoading, blogsReFetch] = GetBlogs();
+
+  // console.log(blogsData);
+
   return (
     <div className="RecentPostContainer ">
       <div className="RecentPostWrapper  flex justify-between gap-2 ">
         {/* recent post container  */}
         <motion.div className="recentPOstContainer  w-full xmd:w-2/3 flex flex-col gap-3 ">
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
-          <BlogCard />
+          {blogsData &&
+            blogsData.map((blog, ind) => (
+              <BlogCard key={blog?._id} blog={blog} />
+            ))}
+
           {/* pagination container  */}
           <div className="paginationContainer  flex justify-center  ">
             <Pagination />
