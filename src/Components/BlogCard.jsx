@@ -76,7 +76,7 @@ const BlogCard = ({ blog }) => {
                   {blog?.title}
                 </motion.h2>
 
-                {/* <motion.p
+                <motion.p
                   variants={blogVarients}
                   initial={"hidden"}
                   whileInView={"animate"}
@@ -86,15 +86,15 @@ const BlogCard = ({ blog }) => {
                   This is a section of some simple filler text, also known as
                   placeholder text. It shares some characteristics of a real
                   written text.
-                </motion.p> */}
-                <motion.p
+                </motion.p>
+                {/* <motion.p
                   variants={blogVarients}
                   initial={"hidden"}
                   whileInView={"animate"}
                   transition={{ duration: 0.4, delay: 0.6 }}
                   className="mb-6  text-gray-700  md:text-sm lg:text-lg "
                   dangerouslySetInnerHTML={{ __html: blog?.description }}
-                ></motion.p>
+                ></motion.p> */}
 
                 <motion.div
                   variants={blogVarients}
