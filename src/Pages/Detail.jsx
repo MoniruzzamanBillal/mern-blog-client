@@ -64,7 +64,6 @@ const Detail = () => {
                   <div className="writerImg   ">
                     <img
                       class=" w-10 h-10 xsm:w-11 xsm:h-11 sm:w-12 sm:h-12 rounded-full"
-                      // src="https://i.ibb.co/B2XybXN/ABU-UBAIDAH-750x430-1.jpg"
                       src={
                         blog?.writerImg
                           ? blog?.writerImg

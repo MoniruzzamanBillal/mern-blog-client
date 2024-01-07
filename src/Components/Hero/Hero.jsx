@@ -35,14 +35,14 @@ const Hero = () => {
         {/* blog card  */}
 
         {/* categories section  */}
-        <motion.div
+        {/* <motion.div
           initial={{ y: 60, opacity: 0 }}
           whileInView={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.4, delay: 0.1 }}
           className="popularCategories   pt-3 xsm:pt-6 sm:pt-8 md:pt-10 pb-2 "
         >
           <Category />
-        </motion.div>
+        </motion.div> */}
         {/* categories section  */}
 
         {/* recent post container  */}

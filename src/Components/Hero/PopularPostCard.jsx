@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import React from "react";
 import { Link } from "react-router-dom";
 
-const PopularPostCard = () => {
+const PopularPostCard = ({ blog }) => {
   const cardVarient = {
     hidden: {
       y: 15,
@@ -14,6 +14,8 @@ const PopularPostCard = () => {
       opacity: 1,
     },
   };
+
+  // console.log(blog);
 
   return (
     <Link to={"/detail/id"}>
@@ -33,7 +35,7 @@ const PopularPostCard = () => {
             className="category mb-1.5 lg:mb-3 "
           >
             <p className=" py-1.5 px-2 text-xs lg:text-sm text-gray-100  rounded-md bg-fuchsia-600 font-semibold inline  ">
-              Category
+              {blog?.category}
             </p>
           </motion.div>
           {/* category btn  */}
@@ -47,7 +49,7 @@ const PopularPostCard = () => {
             className="heading  mb-2  "
           >
             <h1 className=" text-lg lg:text-xl font-medium text-gray-700 ">
-              Simple way to innovate your inovation
+              {blog?.title}
             </h1>
           </motion.div>
           {/* heading ends */}
@@ -61,11 +63,11 @@ const PopularPostCard = () => {
             className="writerInfo  flex gap-1 items-center text-sm lg:text-base "
           >
             {/* writer name  */}
-            <p className="  font-medium  ">writer name -</p>
+            <p className="  font-medium  ">{blog?.writer} -</p>
             {/* writer name  */}
 
             {/* date  */}
-            <p className="  "> 14-12-2023</p>
+            <p className="  "> {blog?.date} </p>
             {/* date  */}
           </motion.div>
           {/* blog writer info ends */}

@@ -4,9 +4,13 @@ import PopularPostCard from "./PopularPostCard";
 import Pagination from "./Pagination";
 import { motion } from "framer-motion";
 import GetBlogs from "../../Hooks/GetBlogs";
+import GetPopular from "../../Hooks/GetPopular";
 
 const RecentPost = () => {
   const [blogsData, blogsDataLoading, blogsReFetch] = GetBlogs();
+  const [popularBlog, popularBlogLoading, popularBlogRefetch] = GetPopular();
+
+  console.log(popularBlog);
 
   // console.log(blogsData);
 
@@ -21,9 +25,12 @@ const RecentPost = () => {
             ))}
 
           {/* pagination container  */}
-          <div className="paginationContainer  flex justify-center  ">
-            <Pagination />
-          </div>
+          {blogsData?.length > 9 && (
+            <div className="paginationContainer  flex justify-center  ">
+              <Pagination />
+            </div>
+          )}
+
           {/* pagination container ends */}
         </motion.div>
         {/* recent post container  */}
@@ -41,9 +48,10 @@ const RecentPost = () => {
 
           {/* popular post card  */}
           <div className="popularPost grid grid-cols-1 gap-12 ">
-            <PopularPostCard />
-            <PopularPostCard />
-            <PopularPostCard />
+            {popularBlog &&
+              popularBlog.map((blog, ind) => (
+                <PopularPostCard key={blog?._id} blog={blog} />
+              ))}
           </div>
           {/* popular post card  */}
         </motion.div>
