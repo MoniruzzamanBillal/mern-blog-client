@@ -3,8 +3,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const BlogCard = ({ blog }) => {
-  console.log(blog);
-
   const blogVarients = {
     hidden: {
       y: 10,

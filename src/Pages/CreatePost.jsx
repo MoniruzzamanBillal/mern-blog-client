@@ -11,6 +11,7 @@ import {
   titleImageError,
 } from "../Util/ToastFunction";
 import UseAxiosPublic from "../Hooks/UseAxiosPublic";
+import UseAuth from "../Hooks/UseAuth";
 
 const modules = {
   toolbar: [
@@ -28,11 +29,15 @@ const modules = {
 };
 
 const CreatePost = () => {
+  const { user } = UseAuth();
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
   const [titleImg, setTitleImg] = useState(null);
+  const [category, setCategory] = useState(null);
   const [fileName, setFileName] = useState("");
   const axiosPublic = UseAxiosPublic();
+
+  console.log(user?.photoURL);
 
   // function for changing title image
   const handleImage = async (e) => {
@@ -56,14 +61,26 @@ const CreatePost = () => {
 
   const handleSubmit = () => {
     const favCount = 0;
+
+    const today = new Date();
+    const date = today.getDate();
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+
+    const writingDate = `${date}-${month}-${year}`;
+
     const blogData = {
       title,
       titleImg,
       description: value,
       favCount,
+      category,
+      date: writingDate,
+      writer: user?.displayName,
+      writerImg: user?.photoURL,
     };
 
-    console.log(blogData);
+    // console.log(blogData);
 
     axiosPublic
       .post("/api//blog/post", blogData)
@@ -79,10 +96,24 @@ const CreatePost = () => {
   return (
     <div className="createPostContainer   ">
       <div className="createPostWrapper w-[95%] xsm:w-[92%] sm:w-[90%]  m-auto  pb-4 ">
+        {/* category container  */}
+
+        {/* category container ends  */}
+
+        <div className="titleContainer   mb-2   ">
+          <input
+            className=" block w-full py-2 px-4 text-xl border-none outline-none   text-gray-600 font-medium "
+            type="text"
+            placeholder="Category"
+            onChange={(e) => setCategory(e.target.value)}
+            value={category}
+          />
+        </div>
+
         {/* title container  */}
         <div className="titleContainer   mb-2   ">
           <input
-            className=" block w-full py-4 px-4 text-2xl border-none outline-none   text-gray-600 font-medium "
+            className=" block w-full py-3 px-4 text-2xl border-none outline-none   text-gray-600 font-medium "
             type="text"
             placeholder="Title"
             onChange={(e) => setTitle(e.target.value)}

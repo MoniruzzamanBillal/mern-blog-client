@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PopularPostCard from "../Components/Hero/PopularPostCard";
 import Comment from "../Components/Detail/Comment";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
-import GetSingleBlog from "../Hooks/GetSingleBlog";
+import UseAxiosPublic from "../Hooks/UseAxiosPublic";
 
 const detailVarient = {
   hidden: {
@@ -18,16 +18,19 @@ const detailVarient = {
 
 const Detail = () => {
   const { id } = useParams();
+  const axiosPublic = UseAxiosPublic();
+  const [blogData, setBlogData] = useState([]);
 
-  console.log(id);
+  useEffect(() => {
+    axiosPublic.get(`/api/blog/${id}`).then((response) => {
+      console.log(response?.data);
+      setBlogData(response?.data);
+    });
+  }, []);
 
-  const [blogData, blogLoading, blogRefetch] = GetSingleBlog(id);
+  // console.log(id);
 
   console.log(blogData);
-
-  if (blogLoading) {
-    return <p>Loading ....</p>;
-  }
 
   return (
     <div className="detailContainer pb-6 ">
@@ -56,13 +59,18 @@ const Detail = () => {
                 {/* left heading  */}
 
                 {/* writer info starts  */}
-                <div className="writerInfo  flex items-center gap-1.5  ">
+                <div className="writerInfo  flex items-center gap-2  ">
                   {/* writer image  */}
                   <div className="writerImg   ">
                     <img
                       class=" w-10 h-10 xsm:w-11 xsm:h-11 sm:w-12 sm:h-12 rounded-full"
-                      src="https://i.ibb.co/B2XybXN/ABU-UBAIDAH-750x430-1.jpg"
-                      alt="Rounded avatar"
+                      // src="https://i.ibb.co/B2XybXN/ABU-UBAIDAH-750x430-1.jpg"
+                      src={
+                        blog?.writerImg
+                          ? blog?.writerImg
+                          : "https://i.ibb.co/B2XybXN/ABU-UBAIDAH-750x430-1.jpg"
+                      }
+                      alt="Rounded avatar "
                     />
                   </div>
                   {/* writer image  */}
@@ -71,10 +79,10 @@ const Detail = () => {
 
                   <div className="writerName   ">
                     <p className=" text-gray-800 font-medium text-sm sm:text-base ">
-                      Writer name
+                      {blog?.writer}
                     </p>
                     <p className=" text-gray-700 font-medium text-xs xsm:text-sm sm:text-base ">
-                      12-2-2023{" "}
+                      {blog?.date}
                     </p>
                   </div>
 

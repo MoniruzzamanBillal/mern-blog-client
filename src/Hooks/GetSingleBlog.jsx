@@ -11,9 +11,7 @@ const GetSingleBlog = (id) => {
   } = useQuery({
     queryKey: ["singleBlog"],
     queryFn: async (id) => {
-      const blogData = await axiosPublic.get(
-        "/api/blog/65984e39f35cc20cc1f7ca79"
-      );
+      const blogData = await axiosPublic.get(`/api/blog/${id}`);
       return blogData?.data;
     },
   });
