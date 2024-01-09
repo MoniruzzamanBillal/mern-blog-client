@@ -21,5 +21,5 @@ export default {
       // => @media (min-width: 1280px) { ... }
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-all")],
 };

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import UseAxiosPublic from "../Hooks/UseAxiosPublic";
 import GetPopular from "../Hooks/GetPopular";
+import { FaHeart } from "react-icons/fa";
 
 const detailVarient = {
   hidden: {
@@ -23,6 +24,7 @@ const Detail = () => {
   const axiosPublic = UseAxiosPublic();
   const [blogData, setBlogData] = useState([]);
 
+  // effect for loading blog data
   useEffect(() => {
     axiosPublic.get(`/api/blog/${id}`).then((response) => {
       setBlogData(response?.data);
@@ -31,12 +33,12 @@ const Detail = () => {
 
   // console.log(id);
 
-  console.log(popularBlog);
+  // console.log(popularBlog);
 
   return (
     <div className="detailContainer pb-6 ">
       {blogData &&
-        blogData.map((blog, ind) => (
+        blogData?.map((blog, ind) => (
           <motion.div
             key={blog?.id}
             className="detailWrapper  w-[98%] xsm:w-[95%] sm:w-[92%]  m-auto "
@@ -90,6 +92,14 @@ const Detail = () => {
                 </div>
                 {/* writer info ends */}
 
+                {/* add favorite  */}
+                <div className="addFavorite  mt-5 flex justify-start items-center gap-2  ">
+                  <p className=" navLinkFont text-xl "> Add to favorite : </p>
+
+                  <FaHeart className=" text-3xl cursor-pointer text-gray-400  " />
+                </div>
+                {/* add favorite ends  */}
+
                 {/*  */}
               </motion.div>
               {/* detail left ends */}
@@ -121,56 +131,15 @@ const Detail = () => {
 
             {/* detail paragraph container  */}
 
-            <div className="detailCOntainer  flex justify-between  ">
+            <div className="detailCOntainer  flex justify-between   ">
               <div className="detailParagraphContainer w-[97%] xsm:w-[94%] sm:w-[90%] xmd:w-[68%] paragraphFont text-sm xsm:text-base sm:text-lg m-auto    ">
                 {/* detail paragraph  */}
-                {/* <motion.div
-                  variants={detailVarient}
-                  initial="hidden"
-                  whileInView={"animate"}
-                  transition={{ duration: 0.3, delay: 0.2 }}
-                  className="detailParagraph    "
-                >
-                  <p className="  mb-4 ">
-                    Conventional development methodologies and tools face
-                    challenges when it comes to component isolation. With the
-                    growing complexity of applications, the task of managing and
-                    reutilizing components in and across various projects
-                    becomes progressively more demanding.
-                  </p>
-
-                  <p className="  mb-4 ">
-                    This is where Bit steps in to offer a modern and efficient
-                    solution.
-                  </p>
-
-                  <p className="  mb-4 ">
-                    Bit is a build system for composable sofware. With Bit, you
-                    can build components as independent pieces of code shared
-                    and collaborated via remote component hostings.
-                  </p>
-
-                  <p className=" font-bold mb-4 ">Software composability</p>
-
-                  <p className=" mb-4 ">
-                    A composable software or application is composed of loosely
-                    coupled and reusable components. These components can be
-                    re-arranged and reused to produce new features and projects.
-                  </p>
-                  <p className="  ">
-                    Think of it as having your own toolkit of well-crafted
-                    components ready to be integrated into your React project.
-                    These components, encapsulated with their logic and styles,
-                    can be combined to create complex and feature-rich
-                    applications, like assembling building blocks.
-                  </p>
-                </motion.div> */}
                 <motion.div
                   variants={detailVarient}
                   initial="hidden"
                   whileInView={"animate"}
                   transition={{ duration: 0.3, delay: 0.2 }}
-                  className="detailParagraph    "
+                  className="detailParagraph   "
                   dangerouslySetInnerHTML={{ __html: blog?.description }}
                 ></motion.div>
                 {/* detail paragraph ends */}

@@ -15,10 +15,10 @@ const PopularPostCard = ({ blog }) => {
     },
   };
 
-  console.log(blog);
+  // console.log(blog);
 
   return (
-    <Link to={"/detail/id"}>
+    <Link to={`/detail/${blog?._id}`}>
       <motion.div
         initial={{ y: 60, opacity: 0 }}
         whileInView={{ y: 0, opacity: 1 }}
@@ -48,9 +48,9 @@ const PopularPostCard = ({ blog }) => {
             transition={{ duration: 0.4, delay: 0.4 }}
             className="heading  mb-2  "
           >
-            <h1 className=" text-lg lg:text-xl font-medium text-gray-700 ">
+            <p className=" text-lg lg:text-xl font-medium text-gray-700 ">
               {blog?.title}
-            </h1>
+            </p>
           </motion.div>
           {/* heading ends */}
 
