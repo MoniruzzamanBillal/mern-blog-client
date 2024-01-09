@@ -15,7 +15,7 @@ const PopularPostCard = ({ blog }) => {
     },
   };
 
-  // console.log(blog);
+  console.log(blog);
 
   return (
     <Link to={"/detail/id"}>

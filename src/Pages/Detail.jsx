@@ -4,6 +4,7 @@ import Comment from "../Components/Detail/Comment";
 import { motion } from "framer-motion";
 import { useParams } from "react-router-dom";
 import UseAxiosPublic from "../Hooks/UseAxiosPublic";
+import GetPopular from "../Hooks/GetPopular";
 
 const detailVarient = {
   hidden: {
@@ -17,20 +18,20 @@ const detailVarient = {
 };
 
 const Detail = () => {
+  const [popularBlog, popularBlogLoading, popularBlogRefetch] = GetPopular();
   const { id } = useParams();
   const axiosPublic = UseAxiosPublic();
   const [blogData, setBlogData] = useState([]);
 
   useEffect(() => {
     axiosPublic.get(`/api/blog/${id}`).then((response) => {
-      console.log(response?.data);
       setBlogData(response?.data);
     });
   }, []);
 
   // console.log(id);
 
-  console.log(blogData);
+  console.log(popularBlog);
 
   return (
     <div className="detailContainer pb-6 ">
@@ -196,8 +197,10 @@ const Detail = () => {
 
                 {/* popular post card  */}
                 <div className="popularPost grid grid-cols-1 gap-12  ">
-                  <PopularPostCard />
-                  <PopularPostCard />
+                  {popularBlog &&
+                    popularBlog.map((blog, ind) => (
+                      <PopularPostCard key={blog?._id} blog={blog} />
+                    ))}
                 </div>
                 {/* popular post card  */}
               </div>
