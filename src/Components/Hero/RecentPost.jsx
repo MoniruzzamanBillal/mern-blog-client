@@ -10,9 +10,13 @@ const RecentPost = () => {
   const [blogsData, blogsDataLoading, blogsReFetch] = GetBlogs();
   const [popularBlog, popularBlogLoading, popularBlogRefetch] = GetPopular();
 
-  console.log(popularBlog);
+  // console.log(popularBlog);
 
   // console.log(blogsData);
+
+  if (blogsDataLoading || popularBlogLoading) {
+    return <p>Loading ...</p>;
+  }
 
   return (
     <div className="RecentPostContainer ">

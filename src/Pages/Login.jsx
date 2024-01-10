@@ -7,14 +7,16 @@ import { auth } from "../Util/Firebase.config";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import UseAuth from "../Hooks/UseAuth";
 import { motion } from "framer-motion";
+import UseAxiosPublic from "../Hooks/UseAxiosPublic";
 
 const Login = () => {
   const { user, loading, loginFunction } = UseAuth();
   const location = useLocation();
+  const axiosPublic = UseAxiosPublic();
 
   const navigate = useNavigate();
 
-  console.log(location);
+  // console.log(location);
 
   const {
     register,
@@ -29,28 +31,49 @@ const Login = () => {
     loginFunction(userEmail, userPassword)
       .then((response) => {
         loggedInSuccessfully();
+
+        const reqData = {
+          userEmail,
+        };
+
         setTimeout(() => {
           navigate(location?.state ? location.state : "/");
         }, 1000);
-        reset();
+
+        // reset();
       })
       .catch((error) => console.log(error));
   };
 
   // function for login  with google
   const googleLogin = () => {
-    console.log("google ");
+    // console.log("google ");
 
     const provider = new GoogleAuthProvider(auth);
 
     signInWithPopup(auth, provider).then((response) => {
       // console.log(response);
+      const userEmail = response?.user?.email;
+
+      const reqData = {
+        userEmail,
+      };
+
+      axiosPublic
+        .post("/api/create/user", reqData)
+        .then((response) => {
+          console.log(response?.data);
+        })
+        .catch((error) => console.log(error));
+
       loggedInSuccessfully();
       setTimeout(() => {
         navigate(location?.state ? location.state : "/");
       }, 1000);
     });
   };
+
+  // console.log(user);
 
   // framer motion varients
   const inputVarients = {

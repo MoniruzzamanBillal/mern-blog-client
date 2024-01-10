@@ -7,8 +7,10 @@ import { motion } from "framer-motion";
 import UseAuth from "../Hooks/UseAuth";
 import { updateProfile } from "firebase/auth";
 import axios from "axios";
+import UseAxiosPublic from "../Hooks/UseAxiosPublic";
 
 const Register = () => {
+  const axiosPublic = UseAxiosPublic();
   const { registerFunction, user, logout } = UseAuth();
   const navigate = useNavigate();
 
@@ -40,6 +42,17 @@ const Register = () => {
     const registerResponse = await registerFunction(userEmail, userPassword);
     // console.log(registerResponse?.user);
     if (registerResponse?.user) {
+      const reqData = {
+        userEmail,
+      };
+
+      axiosPublic
+        .post("/api/create/user", reqData)
+        .then((response) => {
+          console.log(response?.data);
+        })
+        .catch((error) => console.log(error));
+
       updateProfile(registerResponse?.user, {
         displayName: userName,
         photoURL: imageResponse?.data?.data?.display_url,
@@ -50,7 +63,7 @@ const Register = () => {
         logout().then(() => {
           registerSuccessfully();
           setTimeout(() => {
-            navigate("/login");
+            // navigate("/login");
           }, 1200);
         });
       });
