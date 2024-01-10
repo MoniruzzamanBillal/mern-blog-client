@@ -37,8 +37,6 @@ const Register = () => {
       formData
     );
 
-    // console.log(imageResponse?.data?.data?.display_url);
-
     const registerResponse = await registerFunction(userEmail, userPassword);
     // console.log(registerResponse?.user);
     if (registerResponse?.user) {
@@ -56,14 +54,11 @@ const Register = () => {
       updateProfile(registerResponse?.user, {
         displayName: userName,
         photoURL: imageResponse?.data?.data?.display_url,
-        // photoURL: imageUrl,
       }).then((response) => {
-        // console.log(response);
-
         logout().then(() => {
           registerSuccessfully();
           setTimeout(() => {
-            // navigate("/login");
+            navigate("/login");
           }, 1200);
         });
       });

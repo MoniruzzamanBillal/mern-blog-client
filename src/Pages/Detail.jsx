@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import UseAxiosPublic from "../Hooks/UseAxiosPublic";
 import GetPopular from "../Hooks/GetPopular";
 import { FaHeart } from "react-icons/fa";
+import UseAuth from "../Hooks/UseAuth";
 
 const detailVarient = {
   hidden: {
@@ -19,10 +20,14 @@ const detailVarient = {
 };
 
 const Detail = () => {
+  const { user } = UseAuth();
   const [popularBlog, popularBlogLoading, popularBlogRefetch] = GetPopular();
   const { id } = useParams();
   const axiosPublic = UseAxiosPublic();
   const [blogData, setBlogData] = useState([]);
+  const [userEmail, setUserEmail] = useState(user?.email);
+
+  // console.log(user?.email);
 
   // effect for loading blog data
   useEffect(() => {
@@ -34,6 +39,26 @@ const Detail = () => {
   // console.log(id);
 
   // console.log(popularBlog);
+
+  // function for handleing add to favorite
+  const handleFavorite = () => {
+    // console.log("favorite function ");
+
+    // console.log(userEmail);
+
+    const userData = {
+      userEmail,
+    };
+
+    // console.log(userData);
+
+    axiosPublic
+      .patch(`/api/blog/favorite/${id}`, userData)
+      .then((response) => {
+        console.log(response?.data);
+      })
+      .catch((error) => console.log(error));
+  };
 
   return (
     <div className="detailContainer pb-6 ">
@@ -96,7 +121,10 @@ const Detail = () => {
                 <div className="addFavorite  mt-5 flex justify-start items-center gap-2  ">
                   <p className=" navLinkFont text-xl "> Add to favorite : </p>
 
-                  <FaHeart className=" text-3xl cursor-pointer text-gray-400  " />
+                  <FaHeart
+                    onClick={() => handleFavorite()}
+                    className=" text-3xl cursor-pointer text-gray-400  "
+                  />
                 </div>
                 {/* add favorite ends  */}
 

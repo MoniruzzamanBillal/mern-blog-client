@@ -40,7 +40,7 @@ const Login = () => {
           navigate(location?.state ? location.state : "/");
         }, 1000);
 
-        // reset();
+        reset();
       })
       .catch((error) => console.log(error));
   };
