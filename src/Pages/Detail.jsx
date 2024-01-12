@@ -27,6 +27,9 @@ const Detail = () => {
   const [blogData, setBlogData] = useState([]);
   const [userEmail, setUserEmail] = useState(user?.email);
   const [liked, setLiked] = useState(1);
+  const [blogLoading, setBlogloading] = useState(false);
+
+  // console.log("blog id = ", id);
 
   // ! function for handleing add to favorite
   const handleFavorite = () => {
@@ -56,10 +59,12 @@ const Detail = () => {
 
   // ! effect for loading blog data
   useEffect(() => {
+    setBlogloading(true);
     axiosPublic.get(`/api/blog/${id}`).then((response) => {
       setBlogData(response?.data);
+      setBlogloading(false);
     });
-  }, []);
+  }, [id]);
 
   // ! effect for checking user liked blog data
   useEffect(() => {
@@ -72,11 +77,7 @@ const Detail = () => {
       .catch((error) => console.log(error));
   }, [user?.email, loading]);
 
-  // console.log("liked = ", liked);
-  console.log(user?.email);
-  // console.log(userEmail);
-
-  if (loading) {
+  if (loading || blogLoading) {
     return <p>Loading ...</p>;
   }
 

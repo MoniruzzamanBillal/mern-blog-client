@@ -138,3 +138,15 @@ export const commentError = () =>
     progress: undefined,
     theme: "colored",
   });
+
+export const commentAddedSuccessfully = () =>
+  toast.success("Comment added successfully!", {
+    position: "top-center",
+    autoClose: 1000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });

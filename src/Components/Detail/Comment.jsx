@@ -6,7 +6,10 @@ import { Link, Navigate, useLocation } from "react-router-dom";
 import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { commentError } from "../../Util/ToastFunction";
+import {
+  commentAddedSuccessfully,
+  commentError,
+} from "../../Util/ToastFunction";
 import GetComments from "../../Hooks/GetComments";
 import { useQuery } from "@tanstack/react-query";
 
@@ -18,38 +21,43 @@ const Comment = ({ id }) => {
   const axiosPublic = UseAxiosPublic();
   const location = useLocation();
 
-  // console.log("id befire = ", id);
   const [commentsData, commentsDataLoading, commentsReFetch] = GetComments(id);
 
-  // console.log("id in comment = ", id);
-
-  // function for making comment
+  // ! function for making comment
   const handleCommennt = () => {
     if (!commentInput.trim()) {
       commentError();
     }
 
-    // console.log(user);
-    // console.log(user?.displayName);
-    // console.log(user?.photoURL);
+    const today = new Date();
+    const date = today.getDate();
+    const month = today.getMonth() + 1;
+    const year = today.getFullYear();
+    const dateFormat = `${date}-${month}-${year}`;
 
+    // console.log(dateFormat);
     const commentData = {
       comment: commentInput,
       commentar: user?.displayName,
       commentarImage: user?.photoURL,
       blogId: id,
+      commentDate: dateFormat,
     };
+    // console.log(commentData);
 
     // ! for sending posts to database
     axiosPublic
       .post(`/api/comment/blog`, commentData)
       .then((response) => {
-        console.log(response?.data);
+        if (response?.data) {
+          commentAddedSuccessfully();
+        }
+
         commentsReFetch();
       })
       .catch((error) => console.log(error));
 
-    // console.log(commentsData);
+    setCommentInput("");
   };
 
   // console.log(commentsData);
@@ -112,12 +120,18 @@ const Comment = ({ id }) => {
         {/* comment input ends */}
 
         {/* user comment section  */}
-        <div className="userComment flex flex-col gap-10 ">
-          {commentsData &&
-            commentsData.map((comment, ind) => (
-              <UserComment key={ind} comment={comment} />
-            ))}
-        </div>
+
+        {commentsDataLoading ? (
+          <p>Loading ...</p>
+        ) : (
+          <div className="userComment flex flex-col gap-10 ">
+            {commentsData &&
+              commentsData.map((comment, ind) => (
+                <UserComment key={ind} comment={comment} />
+              ))}
+          </div>
+        )}
+
         {/* user comment section  */}
 
         <ToastContainer />

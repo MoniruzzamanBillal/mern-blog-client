@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import React from "react";
 
 const UserComment = ({ comment }) => {
-  console.log(comment);
+  // console.log(comment);
   return (
     <div className="UserCommentContainer   ">
       <motion.div className="UserCommentWrapper   ">
@@ -16,8 +16,7 @@ const UserComment = ({ comment }) => {
           {/* writer image  */}
           <div className="writerImg   ">
             <img
-              class=" w-9 h-9 xsm:w-10 xsm:h-10 sm:w-11 sm:h-11 rounded-full"
-              // src="https://i.ibb.co/B2XybXN/ABU-UBAIDAH-750x430-1.jpg"
+              class=" w-8 h-8 xsm:w-9 xsm:h-9 sm:w-10 sm:h-10 rounded-full"
               src={comment?.commentarImage}
               alt="Rounded avatar"
             />
@@ -27,11 +26,11 @@ const UserComment = ({ comment }) => {
           {/* writer name  */}
 
           <div className="writerName   ">
-            <p className=" text-gray-800 font-semibold text-sm sm:text-base ">
+            <p className=" text-gray-800 font-semibold text-xs sm:text-sm ">
               {comment?.commentar}
             </p>
-            <p className=" text-gray-700 font-medium text-xs xsm:text-sm sm:text-base ">
-              12-2-2023{" "}
+            <p className=" text-gray-700 font-medium text-xs  ">
+              {comment?.commentDate}
             </p>
           </div>
 
