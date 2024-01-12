@@ -26,39 +26,55 @@ const Detail = () => {
   const axiosPublic = UseAxiosPublic();
   const [blogData, setBlogData] = useState([]);
   const [userEmail, setUserEmail] = useState(user?.email);
+  const [liked, setLiked] = useState(1);
 
-  // console.log(user?.email);
+  // function for handleing add to favorite
+  const handleFavorite = () => {
+    const userData = {
+      userEmail,
+    };
 
-  // effect for loading blog data
+    //  for handling favorite button
+    axiosPublic
+      .patch(`/api/blog/favorite/${id}`, userData)
+      .then((response) => {
+        // console.log(response?.data);
+
+        if (
+          response?.data?.liked === undefined ||
+          response?.data?.liked === 0
+        ) {
+          setLiked(0);
+        } else {
+          setLiked(1);
+        }
+
+        // console.log("liked = ", liked);
+      })
+      .catch((error) => console.log(error));
+  };
+
+  // ! effect for loading blog data
   useEffect(() => {
     axiosPublic.get(`/api/blog/${id}`).then((response) => {
       setBlogData(response?.data);
     });
   }, []);
 
-  // console.log(id);
-
-  // console.log(popularBlog);
-
-  // function for handleing add to favorite
-  const handleFavorite = () => {
-    // console.log("favorite function ");
-
-    // console.log(userEmail);
-
-    const userData = {
-      userEmail,
-    };
-
-    // console.log(userData);
-
+  // ! effect for checking user liked blog data
+  useEffect(() => {
     axiosPublic
-      .patch(`/api/blog/favorite/${id}`, userData)
+      .get(`api/blog/favorite/check/${id}?email=${user?.email}`)
       .then((response) => {
         console.log(response?.data);
+        setLiked(response?.data?.liked);
       })
       .catch((error) => console.log(error));
-  };
+  }, [user?.email]);
+
+  // console.log("liked = ", liked);
+  // console.log(user?.email);
+  // console.log(userEmail);
 
   return (
     <div className="detailContainer pb-6 ">
@@ -123,7 +139,9 @@ const Detail = () => {
 
                   <FaHeart
                     onClick={() => handleFavorite()}
-                    className=" text-3xl cursor-pointer text-gray-400  "
+                    className={` text-3xl cursor-pointer   ${
+                      liked ? "text-red-500" : "text-gray-400"
+                    } `}
                   />
                 </div>
                 {/* add favorite ends  */}
