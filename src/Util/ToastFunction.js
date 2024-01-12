@@ -1,6 +1,5 @@
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
 // toast for success fully register
 export const registerSuccessfully = () =>
   toast.success("Register successfully!", {
@@ -120,6 +119,18 @@ export const blogAddedSuccessfully = () =>
   toast.success("Blog added successfully!", {
     position: "top-center",
     autoClose: 1100,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+
+export const commentError = () =>
+  toast.error("Comment is required", {
+    position: "top-center",
+    autoClose: 2000,
     hideProgressBar: false,
     closeOnClick: true,
     pauseOnHover: true,

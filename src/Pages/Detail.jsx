@@ -20,7 +20,7 @@ const detailVarient = {
 };
 
 const Detail = () => {
-  const { user } = UseAuth();
+  const { user, loading } = UseAuth();
   const [popularBlog, popularBlogLoading, popularBlogRefetch] = GetPopular();
   const { id } = useParams();
   const axiosPublic = UseAxiosPublic();
@@ -28,7 +28,7 @@ const Detail = () => {
   const [userEmail, setUserEmail] = useState(user?.email);
   const [liked, setLiked] = useState(1);
 
-  // function for handleing add to favorite
+  // ! function for handleing add to favorite
   const handleFavorite = () => {
     const userData = {
       userEmail,
@@ -66,15 +66,19 @@ const Detail = () => {
     axiosPublic
       .get(`api/blog/favorite/check/${id}?email=${user?.email}`)
       .then((response) => {
-        console.log(response?.data);
+        // console.log(response?.data);
         setLiked(response?.data?.liked);
       })
       .catch((error) => console.log(error));
-  }, [user?.email]);
+  }, [user?.email, loading]);
 
   // console.log("liked = ", liked);
-  // console.log(user?.email);
+  console.log(user?.email);
   // console.log(userEmail);
+
+  if (loading) {
+    return <p>Loading ...</p>;
+  }
 
   return (
     <div className="detailContainer pb-6 ">
@@ -192,7 +196,7 @@ const Detail = () => {
 
                 {/* comment section starts  */}
                 <div className="commentSection mt-14  ">
-                  <Comment />
+                  <Comment id={id} />
                 </div>
                 {/* comment section ends */}
 
