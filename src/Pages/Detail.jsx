@@ -81,8 +81,8 @@ const Detail = () => {
     return <p>Loading ...</p>;
   }
 
-  console.log(user?.displayName);
-  console.log(blogData[0]?.writer);
+  // console.log(user?.displayName);
+  // console.log(blogData[0]?.writer);
 
   return (
     <div className="detailContainer pb-6 ">
@@ -104,7 +104,7 @@ const Detail = () => {
               >
                 {/* left heading  */}
 
-                <h1 className="  font-bold text-xl xsm:text-2xl sm:text-3xl xmd:text-4xl headingFont mb-4 leading-relaxed  ">
+                <h1 className="  font-bold text-xl xsm:text-2xl sm:text-3xl xmd:text-4xl headingFont mb-5 leading-relaxed  ">
                   {blog?.title}
                 </h1>
 
@@ -144,7 +144,7 @@ const Detail = () => {
                 {/* edit section starts  */}
 
                 {user?.displayName === blogData[0]?.writer ? (
-                  <div className="editContainer mt-5  ">
+                  <div className="editContainer mt-7  ">
                     <button className=" bg-red-500 text-gray-50 hover:bg-red-600 hover:text-gray-100 hover:scale-105 active:scale-100 hover:shadow-lg py-2 px-5 rounded transition-all duration-200 font-medium  navLinkFont ">
                       Edit post
                     </button>
@@ -157,16 +157,21 @@ const Detail = () => {
 
                 {/* add favorite  */}
 
-                <div className="addFavorite  mt-5 flex justify-start items-center gap-2  ">
-                  <p className=" navLinkFont text-xl "> Add to favorite : </p>
+                {user?.displayName === blogData[0]?.writer ? (
+                  " "
+                ) : (
+                  <div className="addFavorite  mt-5 flex justify-start items-center gap-2  ">
+                    <p className=" navLinkFont text-xl "> Add to favorite : </p>
 
-                  <FaHeart
-                    onClick={() => handleFavorite()}
-                    className={` text-3xl cursor-pointer   ${
-                      liked ? "text-red-500" : "text-gray-400"
-                    } `}
-                  />
-                </div>
+                    <FaHeart
+                      onClick={() => handleFavorite()}
+                      className={` text-3xl cursor-pointer   ${
+                        liked ? "text-red-500" : "text-gray-400"
+                      } `}
+                    />
+                  </div>
+                )}
+
                 {/* add favorite ends  */}
 
                 {/*  */}
@@ -184,7 +189,6 @@ const Detail = () => {
                 {/* right image  */}
                 <div className="rightImg  h-[18rem] sm:h-[19rem]  md:h-[15rem] xmd:h-[16rem] lg:h-[18rem] rounded-md overflow-auto ">
                   <img
-                    // src="https://i.ibb.co/MGR6dzK/culture.jpg"
                     src={blog?.titleImg}
                     className=" w-full h-full   bgImage "
                     alt=""
