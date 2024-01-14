@@ -23,7 +23,8 @@ const Comment = ({ id }) => {
 
   //! pagination related
   const [currentPage, setCurrentPage] = useState(1);
-  const totalItemCount = commentsData?.length;
+  const totalItemCount = 10;
+  // const totalItemCount = commentsData?.length;
   const dataPerPage = 5;
   const numofpages = Math.ceil(totalItemCount / dataPerPage);
   const pages = [...new Array(numofpages).keys()];

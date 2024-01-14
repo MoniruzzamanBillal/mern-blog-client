@@ -35,10 +35,7 @@ const RecentPost = () => {
   };
 
   // console.log(popularBlog);
-
   // console.log(blogsData);
-  // console.log(blogsData?.length);
-  // console.log(blogsDataLoading);
 
   if (blogsDataLoading || popularBlogLoading) {
     return <p>Loading ...</p>;
@@ -68,18 +65,6 @@ const RecentPost = () => {
               />
             </div>
           )}
-
-          <div className="paginationContainer  flex justify-center  ">
-            <Pagination
-              currentPage={currentPage}
-              totalItemCount={totalItemCount}
-              dataPerPage={dataPerPage}
-              numofpages={numofpages}
-              pages={pages}
-              handleNextCurrent={handleNextCurrent}
-              handlePrev={handlePrev}
-            />
-          </div>
 
           {/* pagination container ends */}
         </motion.div>

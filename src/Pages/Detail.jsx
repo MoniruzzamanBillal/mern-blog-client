@@ -81,6 +81,9 @@ const Detail = () => {
     return <p>Loading ...</p>;
   }
 
+  console.log(user?.displayName);
+  console.log(blogData[0]?.writer);
+
   return (
     <div className="detailContainer pb-6 ">
       {blogData &&
@@ -138,7 +141,22 @@ const Detail = () => {
                 </div>
                 {/* writer info ends */}
 
+                {/* edit section starts  */}
+
+                {user?.displayName === blogData[0]?.writer ? (
+                  <div className="editContainer mt-5  ">
+                    <button className=" bg-red-500 text-gray-50 hover:bg-red-600 hover:text-gray-100 hover:scale-105 active:scale-100 hover:shadow-lg py-2 px-5 rounded transition-all duration-200 font-medium  navLinkFont ">
+                      Edit post
+                    </button>
+                  </div>
+                ) : (
+                  ""
+                )}
+
+                {/* edit section ends */}
+
                 {/* add favorite  */}
+
                 <div className="addFavorite  mt-5 flex justify-start items-center gap-2  ">
                   <p className=" navLinkFont text-xl "> Add to favorite : </p>
 
