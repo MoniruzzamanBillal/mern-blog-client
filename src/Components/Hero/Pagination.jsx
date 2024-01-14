@@ -1,29 +1,15 @@
 import React, { useState } from "react";
 
-const Pagination = () => {
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const totalItemCount = 20;
-  const dataPerPage = 9;
-  const numofpages = Math.ceil(totalItemCount / dataPerPage);
-
-  const pages = [...new Array(numofpages).keys()];
-
-  // function for handle next button in pagination
-  const handleNextCurrent = () => {
-    if (currentPage >= numofpages) {
-      return setCurrentPage(numofpages);
-    }
-    setCurrentPage(currentPage + 1);
-  };
-
-  // function for handle previous button in pagination
-  const handlePrev = () => {
-    if (currentPage <= 1) {
-      return setCurrentPage(1);
-    }
-    setCurrentPage(currentPage - 1);
-  };
+const Pagination = (props) => {
+  const {
+    currentPage,
+    totalItemCount,
+    dataPerPage,
+    numofpages,
+    pages,
+    handleNextCurrent,
+    handlePrev,
+  } = props;
 
   return (
     <div className="paginationContainer mt-3 py-1 ">

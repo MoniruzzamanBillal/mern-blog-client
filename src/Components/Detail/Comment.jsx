@@ -21,10 +21,10 @@ const Comment = ({ id }) => {
   const [commentInput, setCommentInput] = useState("");
   const [commentsData, commentsDataLoading, commentsReFetch] = GetComments(id);
 
-  // pagination related
+  //! pagination related
   const [currentPage, setCurrentPage] = useState(1);
-  const totalItemCount = 20;
-  const dataPerPage = 9;
+  const totalItemCount = commentsData?.length;
+  const dataPerPage = 5;
   const numofpages = Math.ceil(totalItemCount / dataPerPage);
   const pages = [...new Array(numofpages).keys()];
 
@@ -85,6 +85,7 @@ const Comment = ({ id }) => {
   };
 
   // console.log(commentsData);
+  // console.log(currentPage);
   // console.log(commentsData.length);
 
   return (
@@ -160,7 +161,15 @@ const Comment = ({ id }) => {
         {/* comment pagination  */}
 
         <div className="commentPage  py-2  mt-4 ">
-          <Pagination />
+          <Pagination
+            currentPage={currentPage}
+            totalItemCount={totalItemCount}
+            dataPerPage={dataPerPage}
+            numofpages={numofpages}
+            pages={pages}
+            handleNextCurrent={handleNextCurrent}
+            handlePrev={handlePrev}
+          />
         </div>
         {/* comment pagination ends  */}
 

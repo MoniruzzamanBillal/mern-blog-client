@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import BlogCard from "../BlogCard";
 import PopularPostCard from "./PopularPostCard";
 import Pagination from "./Pagination";
@@ -10,9 +10,35 @@ const RecentPost = () => {
   const [blogsData, blogsDataLoading, blogsReFetch] = GetBlogs();
   const [popularBlog, popularBlogLoading, popularBlogRefetch] = GetPopular();
 
+  //! pagination related
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalItemCount = 20;
+  // const totalItemCount = blogsData?.length;
+  const dataPerPage = 5;
+  const numofpages = Math.ceil(totalItemCount / dataPerPage);
+  const pages = [...new Array(numofpages).keys()];
+
+  // function for handle next button in pagination
+  const handleNextCurrent = () => {
+    if (currentPage >= numofpages) {
+      return setCurrentPage(numofpages);
+    }
+    setCurrentPage(currentPage + 1);
+  };
+
+  // function for handle previous button in pagination
+  const handlePrev = () => {
+    if (currentPage <= 1) {
+      return setCurrentPage(1);
+    }
+    setCurrentPage(currentPage - 1);
+  };
+
   // console.log(popularBlog);
 
   // console.log(blogsData);
+  // console.log(blogsData?.length);
+  // console.log(blogsDataLoading);
 
   if (blogsDataLoading || popularBlogLoading) {
     return <p>Loading ...</p>;
@@ -31,9 +57,29 @@ const RecentPost = () => {
           {/* pagination container  */}
           {blogsData?.length > 9 && (
             <div className="paginationContainer  flex justify-center  ">
-              <Pagination />
+              <Pagination
+                currentPage={currentPage}
+                totalItemCount={totalItemCount}
+                dataPerPage={dataPerPage}
+                numofpages={numofpages}
+                pages={pages}
+                handleNextCurrent={handleNextCurrent}
+                handlePrev={handlePrev}
+              />
             </div>
           )}
+
+          <div className="paginationContainer  flex justify-center  ">
+            <Pagination
+              currentPage={currentPage}
+              totalItemCount={totalItemCount}
+              dataPerPage={dataPerPage}
+              numofpages={numofpages}
+              pages={pages}
+              handleNextCurrent={handleNextCurrent}
+              handlePrev={handlePrev}
+            />
+          </div>
 
           {/* pagination container ends */}
         </motion.div>
