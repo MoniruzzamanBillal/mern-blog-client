@@ -12,16 +12,40 @@ import {
 } from "../../Util/ToastFunction";
 import GetComments from "../../Hooks/GetComments";
 import { useQuery } from "@tanstack/react-query";
+import Pagination from "../Hero/Pagination";
 
 const Comment = ({ id }) => {
   const { user } = UseAuth();
   const [blogData, setBlogData] = useState([]);
+
   const [commentInput, setCommentInput] = useState("");
+  const [commentsData, commentsDataLoading, commentsReFetch] = GetComments(id);
+
+  // pagination related
+  const [currentPage, setCurrentPage] = useState(1);
+  const totalItemCount = 20;
+  const dataPerPage = 9;
+  const numofpages = Math.ceil(totalItemCount / dataPerPage);
+  const pages = [...new Array(numofpages).keys()];
+
+  // function for handle next button in pagination
+  const handleNextCurrent = () => {
+    if (currentPage >= numofpages) {
+      return setCurrentPage(numofpages);
+    }
+    setCurrentPage(currentPage + 1);
+  };
+
+  // function for handle previous button in pagination
+  const handlePrev = () => {
+    if (currentPage <= 1) {
+      return setCurrentPage(1);
+    }
+    setCurrentPage(currentPage - 1);
+  };
 
   const axiosPublic = UseAxiosPublic();
   const location = useLocation();
-
-  const [commentsData, commentsDataLoading, commentsReFetch] = GetComments(id);
 
   // ! function for making comment
   const handleCommennt = () => {
@@ -61,6 +85,7 @@ const Comment = ({ id }) => {
   };
 
   // console.log(commentsData);
+  // console.log(commentsData.length);
 
   return (
     <div className="commentContainer   ">
@@ -131,6 +156,13 @@ const Comment = ({ id }) => {
               ))}
           </div>
         )}
+
+        {/* comment pagination  */}
+
+        <div className="commentPage  py-2  mt-4 ">
+          <Pagination />
+        </div>
+        {/* comment pagination ends  */}
 
         {/* user comment section  */}
 
