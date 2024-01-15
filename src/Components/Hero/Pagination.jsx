@@ -11,6 +11,8 @@ const Pagination = (props) => {
     handlePrev,
   } = props;
 
+  // console.log("in pagination = ", totalItemCount);
+
   return (
     <div className="paginationContainer mt-3 py-1 ">
       <div className="paginationWrapper">

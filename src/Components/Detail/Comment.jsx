@@ -23,11 +23,16 @@ const Comment = ({ id }) => {
 
   //! pagination related
   const [currentPage, setCurrentPage] = useState(1);
-  const totalItemCount = 10;
-  // const totalItemCount = commentsData?.length;
+  const [totalItemCount, setTotalItemCount] = useState(null);
+
   const dataPerPage = 5;
   const numofpages = Math.ceil(totalItemCount / dataPerPage);
   const pages = [...new Array(numofpages).keys()];
+  // const totalItemCount = 10;
+  // const totalItemCount = commentsData?.length;
+  // const dataPerPage = 5;
+  // const numofpages = Math.ceil(totalItemCount / dataPerPage);
+  // const pages = [...new Array(numofpages).keys()];
 
   // function for handle next button in pagination
   const handleNextCurrent = () => {
@@ -85,9 +90,14 @@ const Comment = ({ id }) => {
     setCommentInput("");
   };
 
-  // console.log(commentsData);
-  // console.log(currentPage);
-  // console.log(commentsData.length);
+  // ! effect to handle comment related states
+  useEffect(() => {
+    if (!commentsDataLoading) {
+      setTotalItemCount(commentsData?.length);
+    }
+  }, [commentsData, commentsDataLoading]);
+
+  // console.log("total item count = ", totalItemCount);
 
   return (
     <div className="commentContainer   ">
