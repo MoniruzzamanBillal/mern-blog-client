@@ -2,7 +2,7 @@ import axios from "axios";
 import UseAxiosPublic from "./UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
-const GetComments = (id) => {
+const GetComments = (id, currentPage, dataPerPage) => {
   const axiosPublic = UseAxiosPublic();
 
   const {
@@ -10,10 +10,12 @@ const GetComments = (id) => {
     isLoading: commentsDataLoading,
     refetch: commentsReFetch,
   } = useQuery({
-    queryKey: ["getComments", id],
+    queryKey: ["getComments", id, currentPage, dataPerPage],
     queryFn: async () => {
       // console.log(id);
-      const blogsData = await axiosPublic.get(`/api/comments/blog/${id}`);
+      const blogsData = await axiosPublic.get(
+        `/api/comments/blog/${id}?limit=${dataPerPage}&&skip=${currentPage}`
+      );
       // console.log(blogsData?.data?.blogs);
       return blogsData?.data?.blogs;
     },

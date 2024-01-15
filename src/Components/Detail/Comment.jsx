@@ -17,24 +17,21 @@ import Pagination from "../Hero/Pagination";
 const Comment = ({ id }) => {
   const { user } = UseAuth();
   const [blogData, setBlogData] = useState([]);
-
-  const [commentInput, setCommentInput] = useState("");
-  const [commentsData, commentsDataLoading, commentsReFetch] = GetComments(id);
-
   //! pagination related
   const [currentPage, setCurrentPage] = useState(1);
   const [totalItemCount, setTotalItemCount] = useState(null);
-
   const dataPerPage = 5;
   const numofpages = Math.ceil(totalItemCount / dataPerPage);
   const pages = [...new Array(numofpages).keys()];
-  // const totalItemCount = 10;
-  // const totalItemCount = commentsData?.length;
-  // const dataPerPage = 5;
-  // const numofpages = Math.ceil(totalItemCount / dataPerPage);
-  // const pages = [...new Array(numofpages).keys()];
 
-  // function for handle next button in pagination
+  const [commentInput, setCommentInput] = useState("");
+  const [commentsData, commentsDataLoading, commentsReFetch] = GetComments(
+    id,
+    currentPage,
+    dataPerPage
+  );
+
+  // ! function for handle next button in pagination
   const handleNextCurrent = () => {
     if (currentPage >= numofpages) {
       return setCurrentPage(numofpages);
@@ -42,7 +39,7 @@ const Comment = ({ id }) => {
     setCurrentPage(currentPage + 1);
   };
 
-  // function for handle previous button in pagination
+  // ! function for handle previous button in pagination
   const handlePrev = () => {
     if (currentPage <= 1) {
       return setCurrentPage(1);
@@ -96,6 +93,12 @@ const Comment = ({ id }) => {
       setTotalItemCount(commentsData?.length);
     }
   }, [commentsData, commentsDataLoading]);
+
+  // effect when pagination data changed
+  useEffect(() => {
+    // console.log("page number = ", currentPage);
+    commentsReFetch();
+  }, [currentPage, totalItemCount]);
 
   // console.log("total item count = ", totalItemCount);
 
