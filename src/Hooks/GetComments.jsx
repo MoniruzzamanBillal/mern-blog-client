@@ -12,9 +12,9 @@ const GetComments = (id, currentPage, dataPerPage) => {
   } = useQuery({
     queryKey: ["getComments", id, currentPage, dataPerPage],
     queryFn: async () => {
-      // console.log(id);
+      // console.log(id)
       const blogsData = await axiosPublic.get(
-        `/api/comments/blog/${id}?limit=${dataPerPage}&&skip=${currentPage}`
+        `/api/comments/blog/${id}?limit=${dataPerPage}&&skip=${currentPage - 1}`
       );
       // console.log(blogsData?.data?.blogs);
       return blogsData?.data?.blogs;

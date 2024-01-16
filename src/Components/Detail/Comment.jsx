@@ -89,18 +89,21 @@ const Comment = ({ id }) => {
 
   // ! effect to handle comment related states
   useEffect(() => {
-    if (!commentsDataLoading) {
-      setTotalItemCount(commentsData?.length);
-    }
+    axiosPublic.get(`/api/comments/blog/${id}`).then((response) => {
+      // console.log(response?.data?.blogs?.length);
+      setTotalItemCount(response?.data?.blogs?.length);
+    });
   }, [commentsData, commentsDataLoading]);
 
-  // effect when pagination data changed
+  // ! effect when pagination data changed
   useEffect(() => {
-    // console.log("page number = ", currentPage);
+    console.log("page number = ", currentPage);
     commentsReFetch();
   }, [currentPage, totalItemCount]);
 
   // console.log("total item count = ", totalItemCount);
+
+  console.log("comment data length = ", commentsData?.length);
 
   return (
     <div className="commentContainer   ">
@@ -177,6 +180,7 @@ const Comment = ({ id }) => {
         <div className="commentPage  py-2  mt-4 ">
           <Pagination
             currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
             totalItemCount={totalItemCount}
             dataPerPage={dataPerPage}
             numofpages={numofpages}

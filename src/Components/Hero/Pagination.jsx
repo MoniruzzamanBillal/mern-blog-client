@@ -9,6 +9,7 @@ const Pagination = (props) => {
     pages,
     handleNextCurrent,
     handlePrev,
+    setCurrentPage,
   } = props;
 
   // console.log("in pagination = ", totalItemCount);
