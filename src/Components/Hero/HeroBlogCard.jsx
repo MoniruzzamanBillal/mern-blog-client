@@ -27,16 +27,29 @@ const HeroBlogCard = () => {
 
   // ! effect for  getting description
   useEffect(() => {
-    // console.log(heroData[0]);
-
     if (heroData) {
-      console.log("inside condition ");
+      // console.log("inside condition ");
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = heroData[0]?.description;
 
-      console.log(tempDiv);
+      // console.log(tempDiv);
+
+      const paragraphs = tempDiv.querySelectorAll("p");
+
+      const paraText = [];
+
+      let test = "";
+
+      paragraphs.forEach((paragraph) => {
+        test += paragraph.textContent;
+      });
+
+      // console.log(test);
+      setSmallDescription(test);
     }
   }, [heroData]);
+
+  console.log(smallDescription);
 
   return (
     <div className="heroBlogContainer">
@@ -64,9 +77,9 @@ const HeroBlogCard = () => {
                     </h2>
 
                     <p className="mb-9 max-w-md text-gray-600">
-                      This is a section of some simple filler text, also known
-                      as placeholder text. It shares some characteristics of a
-                      real written text.
+                      {smallDescription && smallDescription?.length >= 90
+                        ? ` ${smallDescription.slice(0, 90)}........ `
+                        : smallDescription}
                     </p>
 
                     <div className="mt-auto">

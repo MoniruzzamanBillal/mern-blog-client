@@ -104,7 +104,7 @@ const Comment = ({ id }) => {
   // console.log("total item count = ", totalItemCount);
 
   // console.log("comment data length = ", commentsData?.length);
-  console.log(totalItemCount);
+  // console.log(totalItemCount);
 
   return (
     <div className="commentContainer   ">
