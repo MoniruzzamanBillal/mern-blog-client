@@ -97,13 +97,14 @@ const Comment = ({ id }) => {
 
   // ! effect when pagination data changed
   useEffect(() => {
-    console.log("page number = ", currentPage);
+    // console.log("page number = ", currentPage);
     commentsReFetch();
   }, [currentPage, totalItemCount]);
 
   // console.log("total item count = ", totalItemCount);
 
-  console.log("comment data length = ", commentsData?.length);
+  // console.log("comment data length = ", commentsData?.length);
+  console.log(totalItemCount);
 
   return (
     <div className="commentContainer   ">
@@ -177,18 +178,23 @@ const Comment = ({ id }) => {
 
         {/* comment pagination  */}
 
-        <div className="commentPage  py-2  mt-4 ">
-          <Pagination
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-            totalItemCount={totalItemCount}
-            dataPerPage={dataPerPage}
-            numofpages={numofpages}
-            pages={pages}
-            handleNextCurrent={handleNextCurrent}
-            handlePrev={handlePrev}
-          />
-        </div>
+        {totalItemCount && totalItemCount > 5 ? (
+          <div className="commentPage  py-2  mt-4 ">
+            <Pagination
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+              totalItemCount={totalItemCount}
+              dataPerPage={dataPerPage}
+              numofpages={numofpages}
+              pages={pages}
+              handleNextCurrent={handleNextCurrent}
+              handlePrev={handlePrev}
+            />
+          </div>
+        ) : (
+          " "
+        )}
+
         {/* comment pagination ends  */}
 
         {/* user comment section  */}
