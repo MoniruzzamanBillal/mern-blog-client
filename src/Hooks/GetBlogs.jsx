@@ -2,7 +2,7 @@ import axios from "axios";
 import UseAxiosPublic from "./UseAxiosPublic";
 import { useQuery } from "@tanstack/react-query";
 
-const GetBlogs = () => {
+const GetBlogs = (currentPage, dataPerPage) => {
   const axiosPublic = UseAxiosPublic();
 
   const {
@@ -10,9 +10,12 @@ const GetBlogs = () => {
     isLoading: blogsDataLoading,
     refetch: blogsReFetch,
   } = useQuery({
-    queryKey: ["getBlog"],
+    queryKey: ["getBlog", currentPage, dataPerPage],
     queryFn: async () => {
-      const blogsData = await axiosPublic.get("/api/blogs");
+      const blogsData = await axiosPublic.get(
+        `/api/blogs?limit=${dataPerPage}&&skip=${currentPage - 1}`
+      );
+
       return blogsData?.data?.result;
     },
   });

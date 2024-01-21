@@ -49,7 +49,7 @@ const HeroBlogCard = () => {
     }
   }, [heroData]);
 
-  console.log(smallDescription);
+  // console.log(smallDescription);
 
   return (
     <div className="heroBlogContainer">
