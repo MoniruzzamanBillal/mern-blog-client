@@ -1,22 +1,31 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BlogCard from "../BlogCard";
 import PopularPostCard from "./PopularPostCard";
 import Pagination from "./Pagination";
 import { motion } from "framer-motion";
 import GetBlogs from "../../Hooks/GetBlogs";
 import GetPopular from "../../Hooks/GetPopular";
+import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
+import { useLocation } from "react-router-dom";
 
 const RecentPost = () => {
-  const [blogsData, blogsDataLoading, blogsReFetch] = GetBlogs();
-  const [popularBlog, popularBlogLoading, popularBlogRefetch] = GetPopular();
+  const axiosPublic = UseAxiosPublic();
+  const location = useLocation();
 
   //! pagination related
   const [currentPage, setCurrentPage] = useState(1);
-  const totalItemCount = 20;
-  // const totalItemCount = blogsData?.length;
-  const dataPerPage = 5;
+  const [totalItemCount, setTotalItemCount] = useState(null);
+
+  const dataPerPage = 6;
   const numofpages = Math.ceil(totalItemCount / dataPerPage);
+  // const numofpages = Math.ceil(total / dataPerPage);
   const pages = [...new Array(numofpages).keys()];
+
+  const [blogsData, blogsDataLoading, blogsReFetch] = GetBlogs(
+    currentPage,
+    dataPerPage
+  );
+  const [popularBlog, popularBlogLoading, popularBlogRefetch] = GetPopular();
 
   // function for handle next button in pagination
   const handleNextCurrent = () => {
@@ -37,9 +46,27 @@ const RecentPost = () => {
   // console.log(popularBlog);
   // console.log(blogsData);
 
+  // ! effect  for getting total item count
+  useEffect(() => {
+    axiosPublic.get(`/api/blogs`).then((response) => {
+      console.log("total count effect = ");
+      console.log(response?.data?.result?.length);
+      setTotalItemCount(response?.data?.result?.length);
+    });
+  }, [blogsData, blogsDataLoading, currentPage]);
+
+  useEffect(() => {
+    // console.log("page number = ", currentPage);
+    blogsReFetch();
+  }, [currentPage, totalItemCount]);
+
+  //
+
   if (blogsDataLoading || popularBlogLoading) {
     return <p>Loading ...</p>;
   }
+
+  console.log(totalItemCount);
 
   return (
     <div className="RecentPostContainer ">
@@ -52,7 +79,7 @@ const RecentPost = () => {
             ))}
 
           {/* pagination container  */}
-          {blogsData?.length > 9 && (
+          {totalItemCount && totalItemCount >= 6 ? (
             <div className="paginationContainer  flex justify-center  ">
               <Pagination
                 currentPage={currentPage}
@@ -64,6 +91,8 @@ const RecentPost = () => {
                 handlePrev={handlePrev}
               />
             </div>
+          ) : (
+            ""
           )}
 
           {/* pagination container ends */}

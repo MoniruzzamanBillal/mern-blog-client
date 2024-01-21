@@ -90,7 +90,6 @@ const Comment = ({ id }) => {
   // ! effect to handle comment related states
   useEffect(() => {
     axiosPublic.get(`/api/comments/blog/${id}`).then((response) => {
-      // console.log(response?.data?.blogs?.length);
       setTotalItemCount(response?.data?.blogs?.length);
     });
   }, [commentsData, commentsDataLoading]);
