@@ -1,13 +1,25 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
 import { Link } from "react-router-dom";
 
 const MyBlogCard = ({ blog }) => {
-  //   console.log(blog);
+  const [smallDescription, setSmallDescription] = useState([]);
 
-  //   useeffect to get user description
+  //!   useeffect to get user description
   useEffect(() => {
-    console.log(blog?.description);
+    const tempDiv = document.createElement("div");
+
+    tempDiv.innerHTML = blog?.description;
+
+    const paragraphs = tempDiv.querySelectorAll("p");
+
+    let test = "";
+
+    paragraphs.forEach((paragraph) => {
+      test += paragraph.textContent;
+    });
+
+    setSmallDescription(test);
   }, [blog]);
 
   return (
@@ -22,7 +34,7 @@ const MyBlogCard = ({ blog }) => {
         </div>
 
         <div className="flex flex-1 flex-col p-3 sm:p-5">
-          <h2 className="mb-2 text-lg font-semibold text-gray-800">
+          <h2 className="mb-3.5 text-lg font-semibold text-gray-800">
             <a
               href="#"
               className="transition duration-100 hover:text-indigo-700 active:text-indigo-800 font-semibold "
@@ -31,10 +43,10 @@ const MyBlogCard = ({ blog }) => {
             </a>
           </h2>
 
-          <p className="mb-4 text-gray-800 ">
-            This is a section of some simple filler text, also known as
-            placeholder text. It shares some characteristics of a real written
-            text.
+          <p className="mb-5 text-gray-800 ">
+            {smallDescription && smallDescription?.length >= 90
+              ? smallDescription.slice(0, 90)
+              : smallDescription}
           </p>
 
           <div className="readmoreBtn flex items-center gap-x-1 text-indigo-700 ">
@@ -42,7 +54,7 @@ const MyBlogCard = ({ blog }) => {
               to={`/detail/${blog?._id}`}
               className=" text-lg font-semibold  "
             >
-              Read more{" "}
+              Read more
             </Link>
 
             <FaArrowRightLong className=" text-lg group-hover:translate-x-1 transition-all duration-200 " />
