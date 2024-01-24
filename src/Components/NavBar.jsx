@@ -22,6 +22,7 @@ import { auth } from "../Util/Firebase.config";
 import { logoutSuccessFully } from "../Util/ToastFunction";
 const NavBar = () => {
   const [isSidebarActive, setIsSidebarActive] = useState(false);
+  const [isUserMenuActive, setIsUserMenuActive] = useState(false);
   const { user, loading, sum } = UseAuth();
 
   // console.log(user);
@@ -78,14 +79,40 @@ const NavBar = () => {
           {/* avatar starts  */}
 
           {user && (
-            <div className="abatar  flex justify-between items-center self-center gap-1.5 ">
-              <p className=" text-sm ">{user?.displayName} </p>
-              <img
-                className="w-8 h-8 p-.5 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
-                src={user?.photoURL}
-                alt="Bordered avatar"
-              />
-            </div>
+            <>
+              <div
+                className=" relative abatar cursor-pointer  flex justify-between items-center self-center gap-1.5 "
+                onClick={() => setIsUserMenuActive(!isUserMenuActive)}
+              >
+                <p className=" text-sm ">{user?.displayName} </p>
+                <img
+                  className="w-8 h-8 p-.5 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                  src={user?.photoURL}
+                  alt="Bordered avatar"
+                />
+              </div>
+
+              {/* user nav  */}
+              <div
+                className={` userNav ${
+                  isUserMenuActive ? "flex" : "hidden"
+                }  bg-gray-600 flex  absolute top-11 right-[12.3rem]  px-6 py-2 shadow-md  flex-col gap-2 text-gray-100 rounded  `}
+              >
+                <Link
+                  to={"/create"}
+                  onClick={() => setIsUserMenuActive(!isUserMenuActive)}
+                >
+                  Create
+                </Link>
+                <Link
+                  to={"/myblog"}
+                  onClick={() => setIsUserMenuActive(!isUserMenuActive)}
+                >
+                  My blogs
+                </Link>
+              </div>
+              {/* user nav ends  */}
+            </>
           )}
 
           {/* avatar ends  */}
@@ -106,11 +133,11 @@ const NavBar = () => {
               ))}
           </div>
           {/* nav link  */}
-          {/* creatye button  */}
-          <div className="createBtn ">
+          {/* create button  */}
+          {/* <div className="createBtn ">
             <Link to={"/create"}>Create</Link>
-          </div>
-          {/* creatye button  */}
+          </div> */}
+          {/* create button  */}
           {/* login button  */}
           <div className="loginButton  ">
             {user && user ? (
