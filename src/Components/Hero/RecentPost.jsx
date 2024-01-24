@@ -66,7 +66,7 @@ const RecentPost = () => {
     return <p>Loading ...</p>;
   }
 
-  console.log(totalItemCount);
+  // console.log(totalItemCount);
 
   return (
     <div className="RecentPostContainer ">

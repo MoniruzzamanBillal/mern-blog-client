@@ -1,6 +1,7 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import NavBar from "../Components/NavBar";
+import Footer from "../Components/Footer";
 
 const RootPage = () => {
   return (
@@ -11,6 +12,10 @@ const RootPage = () => {
 
       <div className="mainContainer  pt-[4.4rem] ">
         <Outlet />
+      </div>
+
+      <div className="footerContainer bg-red-500 ">
+        <Footer />
       </div>
     </div>
   );
