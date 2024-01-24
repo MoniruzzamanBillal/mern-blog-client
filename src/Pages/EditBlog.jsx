@@ -13,6 +13,7 @@ import {
   titleImageError,
 } from "../Util/ToastFunction";
 import GetSingleBlog from "../Hooks/GetSingleBlog";
+import axios from "axios";
 
 const modules = {
   toolbar: [
@@ -80,17 +81,17 @@ const EditBlog = () => {
       writerImg: user?.photoURL,
     };
 
-    console.log(blogData);
+    // console.log(blogData);
 
-    // axiosPublic
-    //   .post("/api//blog/post", blogData)
-    //   .then((response) => {
-    //     console.log(response?.data);
-    //     if (response?.data) {
-    //       blogAddedSuccessfully();
-    //     }
-    //   })
-    //   .catch((err) => console.log(err));
+    axiosPublic
+      .patch(`/api/blog/update/${id}`, blogData)
+      .then((response) => {
+        console.log(response?.data);
+        if (response?.data) {
+          blogAddedSuccessfully();
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   //   console.log(blogData);
