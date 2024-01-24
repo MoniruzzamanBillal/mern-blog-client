@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PopularPostCard from "../Components/Hero/PopularPostCard";
 import Comment from "../Components/Detail/Comment";
 import { motion } from "framer-motion";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import UseAxiosPublic from "../Hooks/UseAxiosPublic";
 import GetPopular from "../Hooks/GetPopular";
 import { FaHeart } from "react-icons/fa";
@@ -145,9 +145,12 @@ const Detail = () => {
 
                 {user?.displayName === blogData[0]?.writer ? (
                   <div className="editContainer mt-7  ">
-                    <button className=" bg-red-500 text-gray-50 hover:bg-red-600 hover:text-gray-100 hover:scale-105 active:scale-100 hover:shadow-lg py-2 px-5 rounded transition-all duration-200 font-medium  navLinkFont ">
+                    <Link
+                      to={`/edit/${blogData[0]?._id}`}
+                      className=" bg-red-500 text-gray-50 hover:bg-red-600 hover:text-gray-100 hover:scale-105 active:scale-100 hover:shadow-lg py-2 px-5 rounded transition-all duration-200 font-medium  navLinkFont "
+                    >
                       Edit post
-                    </button>
+                    </Link>
                   </div>
                 ) : (
                   ""

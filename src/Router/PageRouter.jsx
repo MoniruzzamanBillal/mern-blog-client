@@ -7,6 +7,7 @@ import Register from "../Pages/Register";
 import Detail from "../Pages/Detail";
 import CreatePost from "../Pages/CreatePost";
 import MyBlogs from "../Pages/MyBlogs";
+import EditBlog from "../Pages/EditBlog";
 
 export const PageRouter = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const PageRouter = createBrowserRouter([
       {
         path: "/create",
         element: <CreatePost />,
+      },
+      {
+        path: "/edit/:id",
+        element: <EditBlog />,
       },
       {
         path: "/detail/:id",
