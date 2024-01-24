@@ -49,8 +49,8 @@ const RecentPost = () => {
   // ! effect  for getting total item count
   useEffect(() => {
     axiosPublic.get(`/api/blogs`).then((response) => {
-      console.log("total count effect = ");
-      console.log(response?.data?.result?.length);
+      // console.log("total count effect = ");
+      // console.log(response?.data?.result?.length);
       setTotalItemCount(response?.data?.result?.length);
     });
   }, [blogsData, blogsDataLoading, currentPage]);

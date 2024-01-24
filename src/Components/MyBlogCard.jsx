@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaArrowRightLong } from "react-icons/fa6";
+import GetUserBlogs from "../Hooks/GetUserBlogs";
+import UseAuth from "../Hooks/UseAuth";
 
 const MyBlogCard = () => {
+  const { user, loading } = UseAuth();
+  const [displayName, setDisplayName] = useState([]);
+
+  const [userBlogs, userBlogsLoading, userBlogsReFetch] =
+    GetUserBlogs(displayName);
+
+  //   console.log(user?.displayName);
+
+  useEffect(() => {
+    setDisplayName(user?.displayName);
+  }, [user]);
+
+  console.log(displayName);
+
+  console.log(userBlogs);
+
   return (
     <div className="blogCardContainer ">
       <div className="flex flex-col overflow-hidden rounded-lg border bg-gray-50 hover:bg-gray-100 group cursor-pointer shadow-md hover:shadow-xl ">
@@ -17,13 +35,13 @@ const MyBlogCard = () => {
           <h2 className="mb-2 text-lg font-semibold text-gray-800">
             <a
               href="#"
-              className="transition duration-100 hover:text-indigo-600 active:text-indigo-800"
+              className="transition duration-100 hover:text-indigo-700 active:text-indigo-800"
             >
               Working with legacy stacks
             </a>
           </h2>
 
-          <p className="mb-4 text-gray-500 ">
+          <p className="mb-4 text-gray-800 ">
             This is a section of some simple filler text, also known as
             placeholder text. It shares some characteristics of a real written
             text.
