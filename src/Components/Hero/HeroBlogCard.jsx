@@ -19,8 +19,6 @@ const HeroBlogCard = () => {
     // console.log(heroData[0]);
 
     setHeroData(sortedData);
-
-    // ! for extracting html paragraphs
   }, [blogsData]);
 
   // console.log(heroData[0]?.description);
@@ -28,11 +26,8 @@ const HeroBlogCard = () => {
   // ! effect for  getting description
   useEffect(() => {
     if (heroData) {
-      // console.log("inside condition ");
       const tempDiv = document.createElement("div");
       tempDiv.innerHTML = heroData[0]?.description;
-
-      // console.log(tempDiv);
 
       const paragraphs = tempDiv.querySelectorAll("p");
 

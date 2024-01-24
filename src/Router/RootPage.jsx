@@ -10,7 +10,7 @@ const RootPage = () => {
         <NavBar />
       </div>
 
-      <div className="mainContainer  pt-[4.4rem] ">
+      <div className="mainContainer  pt-[4.2rem] ">
         <Outlet />
       </div>
 
