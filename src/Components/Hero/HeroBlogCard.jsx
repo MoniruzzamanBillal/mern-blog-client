@@ -16,8 +16,6 @@ const HeroBlogCard = () => {
       })
       .slice(0, 1);
 
-    // console.log(heroData[0]);
-
     setHeroData(sortedData);
   }, [blogsData]);
 
@@ -30,8 +28,6 @@ const HeroBlogCard = () => {
       tempDiv.innerHTML = heroData[0]?.description;
 
       const paragraphs = tempDiv.querySelectorAll("p");
-
-      const paraText = [];
 
       let test = "";
 
