@@ -37,7 +37,7 @@ const CreatePost = () => {
   const [fileName, setFileName] = useState("");
   const axiosPublic = UseAxiosPublic();
 
-  console.log(user?.photoURL);
+  // console.log(user?.photoURL);
 
   // function for changing title image
   const handleImage = async (e) => {

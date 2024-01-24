@@ -9,10 +9,11 @@ const GetSingleBlog = (id) => {
     isLoading: blogLoading,
     refetch: blogRefetch,
   } = useQuery({
-    queryKey: ["singleBlog"],
-    queryFn: async (id) => {
+    queryKey: ["singleBlog", id],
+    queryFn: async () => {
       const blogData = await axiosPublic.get(`/api/blog/${id}`);
-      return blogData?.data;
+      // console.log(blogData?.data[0]);
+      return blogData?.data[0];
     },
   });
 
