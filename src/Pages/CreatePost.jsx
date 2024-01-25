@@ -90,17 +90,17 @@ const CreatePost = () => {
       writerImg: user?.photoURL,
     };
 
-    console.log(blogData);
+    // console.log(blogData);
 
-    // axiosPublic
-    //   .post("/api//blog/post", blogData)
-    //   .then((response) => {
-    //     console.log(response?.data);
-    //     if (response?.data) {
-    //       blogAddedSuccessfully();
-    //     }
-    //   })
-    //   .catch((err) => console.log(err));
+    axiosPublic
+      .post("/api//blog/post", blogData)
+      .then((response) => {
+        console.log(response?.data);
+        if (response?.data) {
+          blogAddedSuccessfully();
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -133,11 +133,11 @@ const CreatePost = () => {
         {/* title container ends  */}
 
         {/* title image container  */}
-        <div className="titleImage  py-4 mb-3   w-[44%]  border-2 border-gray-300 border-dotted ">
+        <div className="titleImage  py-4 mb-3   w-[56%]  border-2 border-gray-300 border-dotted ">
           <div className="labelCOntainer  text-center  ">
             <label
               htmlFor="file_input"
-              className="  bg-rose-500 hover:bg-rose-600 font-medium text-gray-50 text-sm py-2 px-3 rounded-md cursor-pointer "
+              className="  bg-rose-500 hover:bg-rose-600 font-medium text-gray-50 text-sm py-3 px-4 rounded-md cursor-pointer "
             >
               {fileName ? fileName : "  Upload title image"}
             </label>
