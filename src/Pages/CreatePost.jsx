@@ -7,6 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 import {
   blogAddedSuccessfully,
   contentError,
+  inputError,
   titleError,
   titleImageError,
 } from "../Util/ToastFunction";
@@ -60,6 +61,15 @@ const CreatePost = () => {
   // console.log(fileName);
 
   const handleSubmit = () => {
+    if (
+      !title.trim() ||
+      !titleImg.trim() ||
+      !value.trim() ||
+      !category.trim()
+    ) {
+      return inputError();
+    }
+
     const favCount = 0;
 
     const today = new Date();
@@ -80,17 +90,17 @@ const CreatePost = () => {
       writerImg: user?.photoURL,
     };
 
-    // console.log(blogData);
+    console.log(blogData);
 
-    axiosPublic
-      .post("/api//blog/post", blogData)
-      .then((response) => {
-        console.log(response?.data);
-        if (response?.data) {
-          blogAddedSuccessfully();
-        }
-      })
-      .catch((err) => console.log(err));
+    // axiosPublic
+    //   .post("/api//blog/post", blogData)
+    //   .then((response) => {
+    //     console.log(response?.data);
+    //     if (response?.data) {
+    //       blogAddedSuccessfully();
+    //     }
+    //   })
+    //   .catch((err) => console.log(err));
   };
 
   return (
@@ -155,10 +165,10 @@ const CreatePost = () => {
         {/* text editor ends  */}
 
         {/* submit button  */}
-        <div className="submit  pt-5 text-center  ">
+        <div className="submit  pt-8 text-center  ">
           <button
             onClick={() => handleSubmit()}
-            className=" cursor-pointer text-gray-50 bg-violet-500 hover:bg-violet-700 active:scale-95 py-2 px-5 rounded font-medium headingFont  "
+            className=" cursor-pointer text-gray-50 bg-violet-700 hover:bg-violet-800 active:scale-95 hover:scale-105 hover:shadow-md py-2 px-5 rounded font-medium headingFont  "
           >
             Submit
           </button>

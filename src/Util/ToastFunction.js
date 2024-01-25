@@ -150,3 +150,15 @@ export const commentAddedSuccessfully = () =>
     progress: undefined,
     theme: "colored",
   });
+
+export const inputError = () =>
+  toast.error("All input field is required", {
+    position: "top-center",
+    autoClose: 3000,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
