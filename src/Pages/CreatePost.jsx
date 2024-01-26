@@ -13,6 +13,7 @@ import {
 } from "../Util/ToastFunction";
 import UseAxiosPublic from "../Hooks/UseAxiosPublic";
 import UseAuth from "../Hooks/UseAuth";
+import { useNavigate } from "react-router-dom";
 
 const modules = {
   toolbar: [
@@ -30,6 +31,7 @@ const modules = {
 };
 
 const CreatePost = () => {
+  const navigate = useNavigate();
   const { user } = UseAuth();
   const [title, setTitle] = useState("");
   const [value, setValue] = useState("");
@@ -93,11 +95,12 @@ const CreatePost = () => {
     // console.log(blogData);
 
     axiosPublic
-      .post("/api//blog/post", blogData)
+      .post("/api/blog/post", blogData)
       .then((response) => {
         console.log(response?.data);
         if (response?.data) {
           blogAddedSuccessfully();
+          navigate("/");
         }
       })
       .catch((err) => console.log(err));
