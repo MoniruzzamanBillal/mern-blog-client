@@ -127,6 +127,18 @@ export const blogAddedSuccessfully = () =>
     theme: "colored",
   });
 
+export const blogUpdatedSuccessfully = () =>
+  toast.success("Blog updated successfully!", {
+    position: "top-center",
+    autoClose: 1100,
+    hideProgressBar: false,
+    closeOnClick: true,
+    pauseOnHover: true,
+    draggable: true,
+    progress: undefined,
+    theme: "colored",
+  });
+
 export const commentError = () =>
   toast.error("Comment is required", {
     position: "top-center",

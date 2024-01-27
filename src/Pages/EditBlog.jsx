@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import UseAuth from "../Hooks/UseAuth";
@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import {
   blogAddedSuccessfully,
+  blogUpdatedSuccessfully,
   contentError,
   titleError,
   titleImageError,
@@ -31,6 +32,7 @@ const modules = {
 };
 
 const EditBlog = () => {
+  const navigate = useNavigate();
   const { id } = useParams();
   const [blogData, blogLoading, blogRefetch] = GetSingleBlog(id);
 
@@ -88,7 +90,8 @@ const EditBlog = () => {
       .then((response) => {
         console.log(response?.data);
         if (response?.data) {
-          blogAddedSuccessfully();
+          blogUpdatedSuccessfully();
+          navigate("/myblog");
         }
       })
       .catch((err) => console.log(err));
