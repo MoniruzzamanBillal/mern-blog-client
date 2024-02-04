@@ -7,6 +7,7 @@ import UseAxiosPublic from "../Hooks/UseAxiosPublic";
 import GetPopular from "../Hooks/GetPopular";
 import { FaHeart } from "react-icons/fa";
 import UseAuth from "../Hooks/UseAuth";
+import Loading from "../Components/Loading";
 
 const detailVarient = {
   hidden: {
@@ -78,7 +79,7 @@ const Detail = () => {
   }, [user?.email, loading]);
 
   if (loading || blogLoading) {
-    return <p>Loading ...</p>;
+    return <Loading />;
   }
 
   // console.log(user?.displayName);

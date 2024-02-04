@@ -7,6 +7,7 @@ import GetBlogs from "../../Hooks/GetBlogs";
 import GetPopular from "../../Hooks/GetPopular";
 import UseAxiosPublic from "../../Hooks/UseAxiosPublic";
 import { useLocation } from "react-router-dom";
+import Loading from "../Loading";
 
 const RecentPost = () => {
   const axiosPublic = UseAxiosPublic();
@@ -63,7 +64,7 @@ const RecentPost = () => {
   //
 
   if (blogsDataLoading || popularBlogLoading) {
-    return <p>Loading ...</p>;
+    return <Loading />;
   }
 
   // console.log(totalItemCount);
